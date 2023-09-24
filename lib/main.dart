@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_watch/pages/home/home.dart';
+import 'package:news_watch/pages/page_manager.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,8 +10,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Home(),
+    return MaterialApp(
+      home: const PageManager(),
+      themeMode: ThemeMode.system,
+      theme: ThemeData(
+        useMaterial3: true,
+        colorSchemeSeed: Colors.blue
+      ),
     );
   }
 }

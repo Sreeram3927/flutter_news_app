@@ -9,7 +9,6 @@ class SearchPage extends StatelessWidget {
     return Column(
       children: [
         TextField(
-          // enableSuggestions: true,
           decoration: InputDecoration(
             hintText: "Search...",
             suffixIcon: IconButton(
