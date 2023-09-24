@@ -17,7 +17,7 @@ class _BottomBarState extends State<BottomBar> {
         GButton(icon: Icons.home_outlined, text: 'Home'),
         GButton(icon: Icons.search_outlined, text: 'Search'),
         GButton(icon: Icons.bookmark_outline_rounded, text: 'Bookmarks'),
-        GButton(icon: Icons.account_circle_outlined, text: 'Profile'),
+        GButton(icon: Icons.settings_outlined, text: 'Settings'),
       ]
     );
   }

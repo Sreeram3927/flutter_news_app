@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_watch/pages/home/search_page.dart';
 import 'package:news_watch/widgets/bottom_bar.dart';
 import 'package:news_watch/widgets/news_feed.dart';
 import 'package:news_watch/widgets/top_bar.dart';
@@ -11,21 +12,22 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBar(),
-      extendBodyBehindAppBar: true,
-      body: ListView(
-        children: const [
-          TrendingNewsFeed(),
-          NewsFeed(),
-          NewsFeed(),
-          NewsFeed(),
-          NewsFeed(),
-          NewsFeed(),
-          NewsFeed(),
-          NewsFeed(),
-          NewsFeed(),
-          NewsFeed(),
-        ],
-      ),
+      // extendBodyBehindAppBar: true,
+      // body: ListView(
+      //   children: const [
+      //     TrendingNewsFeed(),
+      //     NewsFeed(),
+      //     NewsFeed(),
+      //     NewsFeed(),
+      //     NewsFeed(),
+      //     NewsFeed(),
+      //     NewsFeed(),
+      //     NewsFeed(),
+      //     NewsFeed(),
+      //     NewsFeed(),
+      //   ],
+      // ),
+      body: SearchPage(),
       bottomNavigationBar: BottomBar(),
     );
   }
