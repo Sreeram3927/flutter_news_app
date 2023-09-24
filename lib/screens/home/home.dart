@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_watch/widgets/news_feed.dart';
 import 'package:news_watch/widgets/top_bar.dart';
 
 class Home extends StatelessWidget {
@@ -8,8 +9,10 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBar(),
-      body: Center(
-        child: Text('Hello World!'),
+      body: Column(
+        children: [
+          NewsFeed()
+        ]
       ),
     );
   }
