@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_watch/pages/bookmarks/bookmark_page.dart';
-import 'package:news_watch/pages/home/home.dart';
+import 'package:news_watch/pages/home/home_page.dart';
 import 'package:news_watch/pages/search/search_page.dart';
 import 'package:news_watch/widgets/bottom_bar.dart';
 import 'package:news_watch/widgets/top_bar.dart';
@@ -17,7 +17,7 @@ class _PageManagerState extends State<PageManager> {
   final PageController pageController = PageController();
 
   final List<Widget> pages = const [
-    Home(),
+    HomePage(),
     SearchPage(),
     BookmarksPage(),
     Text("Settings"),

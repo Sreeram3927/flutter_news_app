@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:news_watch/pages/page_manager.dart';
 
 void main() {
@@ -15,7 +16,8 @@ class MainApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: ThemeData(
         useMaterial3: true,
-        colorSchemeSeed: Colors.blue
+        colorSchemeSeed: Colors.blue,
+        textTheme: GoogleFonts.mavenProTextTheme(),
       ),
     );
   }
