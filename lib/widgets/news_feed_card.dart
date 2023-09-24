@@ -1,44 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:news_watch/data/news.dart';
 
-class NewsFeed extends StatelessWidget {
-  const NewsFeed({super.key});
+class NewsFeedCard extends StatelessWidget {
+  final News news;
+  const NewsFeedCard({
+    super.key,
+    required this.news,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Card(
+    return Card(
       child: Row(
         children: [
           Expanded(
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
                   Row(
                     children: [
-                      CircleAvatar(
-                        backgroundImage: NetworkImage('https://www.bing.com/th?id=ODF.KANCozAEZYO1NwXNST5YDQ&pid=news&w=16&h=16&c=14&rs=2&qlt=90&dpr=1.3'),
+                      if (news.newsOutletLogoUrl != null) CircleAvatar(
+                        backgroundImage: NetworkImage(news.newsOutletLogoUrl!),
                         radius: 7,
                       ),
-                      SizedBox(width: 6),
+                      const SizedBox(width: 6),
                       Text(
-                        "timesnownews",
-                        style: TextStyle(
+                        news.newsOutlet,
+                        style: const TextStyle(
                           fontSize: 15,
                         ),
                       ),
                       Text(
-                        " | 1h",
-                        style: TextStyle(
+                        " | ${news.timeAgo}",
+                        style: const TextStyle(
                           fontSize: 15,
                           color: Colors.grey,
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 6),
+                  const SizedBox(height: 6),
                   Text(
-                    "How to Watch: NASA's OSIRIS-REx Mission Bringing Asteroid Sample Back to Earth After Travelling for 3 Years",
-                    style: TextStyle(
+                    news.title,
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -49,10 +54,10 @@ class NewsFeed extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.all(10.0),
+          if (news.imageUrl != null) Padding(
+            padding: const EdgeInsets.all(10.0),
             child: Image(
-              image: NetworkImage('https://th.bing.com/th?id=OVFT.gqBmAH9mIZraTqwv8FOKVS&pid=News&w=234&h=132&c=14&rs=2&qlt=90&dpr=1.3'),
+              image: NetworkImage(news.imageUrl!),
               fit: BoxFit.fitHeight,
               width: 145,
               height: 100,
