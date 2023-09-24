@@ -19,7 +19,8 @@ class _PageManagerState extends State<PageManager> {
   final List<Widget> pages = const [
     HomePage(),
     SearchPage(),
-    BookmarksPage(),
+    // BookmarksPage(),
+    Text('bookmarks'),
     Text("Settings"),
   ];
 
@@ -27,10 +28,13 @@ class _PageManagerState extends State<PageManager> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const TopBar(),
-      body: PageView(
-        controller: pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: pages,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: PageView(
+          controller: pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: pages,
+        ),
       ),
       bottomNavigationBar: BottomBar(
         changePage: (index) => pageController.animateToPage(

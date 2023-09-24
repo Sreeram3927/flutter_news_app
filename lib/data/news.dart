@@ -3,6 +3,7 @@ class News {
   final String content;
   final String newsOutlet;
   final String timeAgo;
+  final String webUrl;
   String? imageUrl;
   String? newsOutletLogoUrl;
 
@@ -11,6 +12,7 @@ class News {
     required this.content,
     required this.newsOutlet,
     required this.timeAgo,
+    required this.webUrl,
     this.imageUrl,
     this.newsOutletLogoUrl,
   });
