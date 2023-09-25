@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
             }),
             options: CarouselOptions(
               autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 5),
+              autoPlayInterval: const Duration(seconds: 7),
               enableInfiniteScroll: false,
               aspectRatio: 2.0,
               enlargeCenterPage: true,
