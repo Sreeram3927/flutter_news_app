@@ -93,13 +93,19 @@ class _HomePageState extends State<HomePage> {
 
         SliverToBoxAdapter(
           child: CarouselSlider(
-            items: const [
-              TrendingNewsFeed(),
-              TrendingNewsFeed(),
-              TrendingNewsFeed(),
-              TrendingNewsFeed(),
-              TrendingNewsFeed(),
-            ],
+            items: List.generate(10, (index) {
+              return TrendingNewsFeed(
+                news: News(
+                  title: "How to Watch: NASA's OSIRIS-REx Mission Bringing Asteroid Sample Back to Earth After Travelling for 3 Years",
+                  content: 'not for now',
+                  newsOutlet: 'timesnownews',
+                  timeAgo: '${index}h',
+                  webUrl: 'https://www.example.com',
+                  imageUrl: 'https://th.bing.com/th?id=OVFT.gqBmAH9mIZraTqwv8FOKVS&pid=News&w=234&h=132&c=14&rs=2&qlt=90&dpr=1.3',
+                  newsOutletLogoUrl: 'https://www.bing.com/th?id=ODF.KANCozAEZYO1NwXNST5YDQ&pid=news&w=16&h=16&c=14&rs=2&qlt=90&dpr=1.3'
+                )
+              );
+            }),
             options: CarouselOptions(
               autoPlay: true,
               autoPlayInterval: const Duration(seconds: 5),

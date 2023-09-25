@@ -33,10 +33,7 @@ class NewsFeedCard extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          if (news.newsOutletLogoUrl != null) CircleAvatar(
-                            backgroundImage: NetworkImage(news.newsOutletLogoUrl!),
-                            radius: 7,
-                          ),
+                          news.newsOutletLogo(7),
                           const SizedBox(width: 6),
                           Text(
                             news.newsOutlet,
@@ -67,11 +64,9 @@ class NewsFeedCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 7.5),
-                if (news.imageUrl != null) ClipRRect(
+                ClipRRect(
                   borderRadius: BorderRadius.circular(7.5),
-                  child: Image(
-                    image: NetworkImage(news.imageUrl!),
-                    fit: BoxFit.fitHeight,
+                  child: news.newsImage(
                     width: 135,
                     height: 85,
                   ),
@@ -108,21 +103,16 @@ class NewsCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10.0),
-          if (news.imageUrl != null) ClipRRect(
+          ClipRRect(
             borderRadius: BorderRadius.circular(7.5),
-            child: Image(
-              image: NetworkImage(news.imageUrl!),
-              fit: BoxFit.fitHeight,
+            child: news.newsImage(
               width: double.infinity,
             ),
           ),
           const SizedBox(height: 10.0),
           Row(
             children: [
-              if (news.newsOutletLogoUrl != null) CircleAvatar(
-                backgroundImage: NetworkImage(news.newsOutletLogoUrl!),
-                radius: 12.5,
-              ),
+              news.newsOutletLogo(12.5),
               const SizedBox(width: 6),
               Text(
                 news.newsOutlet,
