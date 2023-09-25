@@ -22,7 +22,7 @@ class NewsFeedCard extends StatelessWidget {
         );
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4),
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
         child: Card(
           child: Padding(
             padding: const EdgeInsets.all(10.0),

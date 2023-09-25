@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_watch/data/news.dart';
 import 'package:news_watch/widgets/news_cards.dart';
+import 'package:news_watch/widgets/top_bar.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -25,31 +26,40 @@ class _SearchPageState extends State<SearchPage> {
     return CustomScrollView(
       slivers: [
 
-        SliverAppBar(
-          floating: true,
-          snap: true,
-          toolbarHeight: 40,
-          flexibleSpace: TextField(
-            focusNode: _searchFocusNode,
-            onTap: () {
-              setState(() {
-                isSearching = true;
-              });
-            },
-            onTapOutside: (event) {
+        TopBar(
+          leading: isSearching ? IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
               setState(() {
                 isSearching = false;
                 _searchFocusNode.unfocus();
               });
             },
-            decoration: InputDecoration(
-              hintText: "Search...",
-              suffixIcon: IconButton(
-                icon: const Icon(Icons.search),
-                onPressed: () {},
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
+          ) : null,
+          title: SizedBox(
+            height: 40,
+            child: TextField(
+              focusNode: _searchFocusNode,
+              onTap: () {
+                setState(() {
+                  isSearching = true;
+                });
+              },
+              onTapOutside: (event) {
+                setState(() {
+                  isSearching = false;
+                  _searchFocusNode.unfocus();
+                });
+              },
+              decoration: InputDecoration(
+                hintText: "Search...",
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {},
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
               ),
             ),
           ),

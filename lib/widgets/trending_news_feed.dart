@@ -8,18 +8,17 @@ class TrendingNewsFeed extends StatelessWidget {
     return Card(
       child: Stack(
         children: [
-
-          Image(
+          
+          const Image(
             image: NetworkImage('https://th.bing.com/th?id=OVFT.gqBmAH9mIZraTqwv8FOKVS&pid=News&w=234&h=132&c=14&rs=2&qlt=90&dpr=1.3'),
             fit: BoxFit.cover,
             width: double.infinity,
             height: 200,
           ),
-
-
+    
           Positioned.fill(
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
@@ -28,9 +27,8 @@ class TrendingNewsFeed extends StatelessWidget {
               ),
             ),
           ),
-
-
-          Positioned(
+    
+          const Positioned(
             left: 8.0,
             right: 8.0,
             bottom: 8.0,

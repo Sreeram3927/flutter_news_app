@@ -3,7 +3,6 @@ import 'package:news_watch/pages/bookmarks/bookmark_page.dart';
 import 'package:news_watch/pages/home/home_page.dart';
 import 'package:news_watch/pages/search/search_page.dart';
 import 'package:news_watch/widgets/bottom_bar.dart';
-import 'package:news_watch/widgets/top_bar.dart';
 
 class PageManager extends StatefulWidget {
   const PageManager({super.key});
@@ -27,14 +26,10 @@ class _PageManagerState extends State<PageManager> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TopBar(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: PageView(
-          controller: pageController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: pages,
-        ),
+      body: PageView(
+        controller: pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: pages,
       ),
       bottomNavigationBar: BottomBar(
         changePage: (index) => pageController.animateToPage(

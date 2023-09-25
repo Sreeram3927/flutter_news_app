@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_watch/data/news.dart';
 import 'package:news_watch/widgets/news_cards.dart';
+import 'package:news_watch/widgets/top_bar.dart';
 
 class BookmarksPage extends StatefulWidget {
   const BookmarksPage({super.key});
@@ -27,16 +28,25 @@ class _BookmarksPageState extends State<BookmarksPage> with AutomaticKeepAliveCl
   });
 
   @override
-  void initState() {
-    print('hello');
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     super.build(context);
-    return ListView(
-      children: bookmarks.map((news) => NewsFeedCard(news: news)).toList(),
+    return CustomScrollView(
+      slivers: [
+        const TopBar(
+          title: Text("Bookmarks"),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              return NewsFeedCard(news: bookmarks[index]);
+            },
+            childCount: bookmarks.length
+          ),
+        ),
+      ],
+      // child: ListView(
+      //   children: bookmarks.map((news) => NewsFeedCard(news: news)).toList(),
+      // ),
     );
   }
 }
