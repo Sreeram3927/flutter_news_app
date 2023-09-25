@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   final List<News> items = List.generate(10, (index) {
     return News(
       title: "How to Watch: NASA's OSIRIS-REx Mission Bringing Asteroid Sample Back to Earth After Travelling for 3 Years",
-      content: 'not for now',
+      content: 'OSIRIS-REx was a NASA asteroid-study and sample-return mission that visited and collected samples from 101955 Bennu, a carbonaceous near-Earth asteroid.[12] The material, returned in September 2023,[13] is expected to enable scientists to learn more about the formation and evolution of the Solar System, its initial stages of planet formation, and the source of organic compounds that led to the formation of life on Earth.[14] Following the completion of the primary mission, the spacecraft is planned to conduct proximity operations and in-depth study of asteroid 99942 Apophis as OSIRIS-APEX.[15]',
       newsOutlet: 'timesnownews',
       timeAgo: '${index}h',
       webUrl: 'https://www.example.com',
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       items.addAll(List.generate(5, (index) {
         return News(
           title: "How to Watch: NASA's OSIRIS-REx Mission Bringing Asteroid Sample Back to Earth After Travelling for 3 Years",
-          content: 'not for now',
+          content: 'OSIRIS-REx was a NASA asteroid-study and sample-return mission that visited and collected samples from 101955 Bennu, a carbonaceous near-Earth asteroid.[12] The material, returned in September 2023,[13] is expected to enable scientists to learn more about the formation and evolution of the Solar System, its initial stages of planet formation, and the source of organic compounds that led to the formation of life on Earth.[14] Following the completion of the primary mission, the spacecraft is planned to conduct proximity operations and in-depth study of asteroid 99942 Apophis as OSIRIS-APEX.[15]',
           newsOutlet: 'timesnownews',
           timeAgo: '${index}h',
           webUrl: 'https://www.example.com',
@@ -109,8 +109,10 @@ class _HomePageState extends State<HomePage> {
             options: CarouselOptions(
               autoPlay: true,
               autoPlayInterval: const Duration(seconds: 5),
+              enableInfiniteScroll: false,
               aspectRatio: 2.0,
               enlargeCenterPage: true,
+              enlargeFactor: 0.215,
               enlargeStrategy: CenterPageEnlargeStrategy.height,
             ),
           )

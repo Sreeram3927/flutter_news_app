@@ -28,6 +28,7 @@ class _SearchPageState extends State<SearchPage> {
 
         TopBar(
           leading: isSearching ? IconButton(
+            splashColor: Colors.blue[300],
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
               setState(() {

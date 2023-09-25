@@ -11,16 +11,7 @@ class NewsFeedCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        showModalBottomSheet(
-          context: context,
-          useSafeArea: true,
-          isScrollControlled: true,
-          builder: (context) {
-            return NewsCard(news: news);
-          }
-        );
-      },
+      onTap: () => news.additionalInfo(context),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
         child: Card(
@@ -90,7 +81,7 @@ class NewsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10.0, 8.0, 10.0, 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -136,6 +127,7 @@ class NewsCard extends StatelessWidget {
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
+            textAlign: TextAlign.justify,
           ),
           const SizedBox(height: 10.0),
           Text(
@@ -143,6 +135,35 @@ class NewsCard extends StatelessWidget {
             style: const TextStyle(
               fontSize: 17,
             ),
+            textAlign: TextAlign.justify,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 10,
+          ),
+          const SizedBox(height: 10.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ElevatedButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.bookmark_border_outlined),
+                label: const Text(
+                  "Bookmark",
+                  style: TextStyle(
+                    fontSize: 17,
+                  ),
+                )
+              ),
+              ElevatedButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.share_rounded),
+                label: const Text(
+                  "Share",
+                  style: TextStyle(
+                    fontSize: 17,
+                  ),
+                )
+              )
+            ],
           ),
           const SizedBox(height: 10.0),
           ElevatedButton(

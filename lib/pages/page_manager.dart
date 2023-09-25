@@ -34,8 +34,8 @@ class _PageManagerState extends State<PageManager> {
       bottomNavigationBar: BottomBar(
         changePage: (index) => pageController.animateToPage(
           index,
-          duration: const Duration(milliseconds: 400),
-          curve: Curves.easeInOut
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOutSine
         ),
       ),
     );

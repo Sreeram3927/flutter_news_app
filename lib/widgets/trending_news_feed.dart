@@ -10,69 +10,76 @@ class TrendingNewsFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Stack(
-        children: [
-          
-          news.newsImage(
-            width: double.infinity,
-            height: 200,
-          ),
-    
-          Positioned.fill(
-            child: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Colors.transparent, Colors.black], 
+    return GestureDetector(
+      onTap: () => news.additionalInfo(context),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Stack(
+            children: [
+              
+              news.newsImage(
+                width: double.infinity,
+                height: 200,
+              ),
+            
+              Positioned.fill(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Colors.transparent, Colors.black], 
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-    
-          Positioned(
-            left: 8.0,
-            right: 8.0,
-            bottom: 8.0,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+            
+              Positioned(
+                left: 8.0,
+                right: 8.0,
+                bottom: 8.0,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    news.newsOutletLogo(7),
-                    const SizedBox(width: 6),
+                    Row(
+                      children: [
+                        news.newsOutletLogo(7),
+                        const SizedBox(width: 6),
+                        Text(
+                          news.newsOutlet,
+                          style: const TextStyle(
+                            fontSize: 15,
+                            color: Colors.white
+                          ),
+                        ),
+                        Text(
+                          " | ${news.timeAgo}",
+                          style: const TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 6),
                     Text(
-                      news.newsOutlet,
+                      news.title,
                       style: const TextStyle(
-                        fontSize: 15,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                         color: Colors.white
                       ),
-                    ),
-                    Text(
-                      " | ${news.timeAgo}",
-                      style: const TextStyle(
-                        fontSize: 15,
-                        color: Colors.grey,
-                      ),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
-                const SizedBox(height: 6),
-                Text(
-                  news.title,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white
-                  ),
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

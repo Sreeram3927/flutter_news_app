@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_watch/widgets/news_cards.dart';
 
 class News {
   final String title;
@@ -41,6 +42,17 @@ class News {
     } else {
       return const SizedBox.shrink();
     }
+  }
+
+  void additionalInfo(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      useSafeArea: true,
+      isScrollControlled: true,
+      builder: (context) {
+        return NewsCard(news: this);
+      }
+    );
   }
 
 }
