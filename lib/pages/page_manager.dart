@@ -19,8 +19,8 @@ class _PageManagerState extends State<PageManager> {
   final List<Widget> pages = const [
     HomePage(),
     SearchPage(),
-    // BookmarksPage(),
-    Text('bookmarks'),
+    BookmarksPage(key: PageStorageKey('bookmarks'),),
+    // Text('bookmarks'),
     Text("Settings"),
   ];
 
