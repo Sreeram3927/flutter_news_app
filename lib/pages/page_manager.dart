@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_watch/pages/bookmarks/bookmark_page.dart';
 import 'package:news_watch/pages/home/home_page.dart';
 import 'package:news_watch/pages/search/search_page.dart';
+import 'package:news_watch/pages/settings/settings_page.dart';
 import 'package:news_watch/widgets/bottom_bar.dart';
 
 class PageManager extends StatefulWidget {
@@ -19,8 +20,7 @@ class _PageManagerState extends State<PageManager> {
     HomePage(),
     SearchPage(),
     BookmarksPage(key: PageStorageKey('bookmarks'),),
-    // Text('bookmarks'),
-    Text("Settings"),
+    SettingsPage(),
   ];
 
   @override
