@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_watch/widgets/news_cards.dart';
+import 'package:news_watch/widgets/news_card.dart';
 
 class News {
   final String title;
@@ -9,6 +9,7 @@ class News {
   final String webUrl;
   String? imageUrl;
   String? newsOutletLogoUrl;
+  bool isBookmarked;
 
   News({
     required this.title,
@@ -18,6 +19,7 @@ class News {
     required this.webUrl,
     this.imageUrl,
     this.newsOutletLogoUrl,
+    this.isBookmarked = false,
   });
 
   Widget newsImage({double? height, required double width}) {

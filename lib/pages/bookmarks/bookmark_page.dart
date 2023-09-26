@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_watch/data/news.dart';
-import 'package:news_watch/widgets/news_cards.dart';
+import 'package:news_watch/widgets/news_feed_card.dart';
 import 'package:news_watch/widgets/top_bar.dart';
 
 class BookmarksPage extends StatefulWidget {
@@ -23,7 +23,8 @@ class _BookmarksPageState extends State<BookmarksPage> with AutomaticKeepAliveCl
       timeAgo: '${index}h',
       webUrl: 'https://www.example.com',
       imageUrl: 'https://th.bing.com/th?id=OVFT.gqBmAH9mIZraTqwv8FOKVS&pid=News&w=234&h=132&c=14&rs=2&qlt=90&dpr=1.3',
-      newsOutletLogoUrl: 'https://www.bing.com/th?id=ODF.KANCozAEZYO1NwXNST5YDQ&pid=news&w=16&h=16&c=14&rs=2&qlt=90&dpr=1.3'
+      newsOutletLogoUrl: 'https://www.bing.com/th?id=ODF.KANCozAEZYO1NwXNST5YDQ&pid=news&w=16&h=16&c=14&rs=2&qlt=90&dpr=1.3',
+      isBookmarked: true
     );
   });
 

@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:news_watch/data/news.dart';
-import 'package:news_watch/widgets/news_cards.dart';
+import 'package:news_watch/widgets/news_feed_card.dart';
 import 'package:news_watch/widgets/top_bar.dart';
 import 'package:news_watch/widgets/trending_news_feed.dart';
 

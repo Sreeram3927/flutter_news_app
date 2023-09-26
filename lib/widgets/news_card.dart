@@ -1,76 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_watch/data/news.dart';
 
-class NewsFeedCard extends StatelessWidget {
-  final News news;
-  const NewsFeedCard({
-    super.key,
-    required this.news,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => news.additionalInfo(context),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          news.newsOutletLogo(7),
-                          const SizedBox(width: 6),
-                          Text(
-                            news.newsOutlet,
-                            style: const TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                          Text(
-                            " | ${news.timeAgo}",
-                            style: const TextStyle(
-                              fontSize: 15,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 6),
-                      Text(
-                        news.title,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 7.5),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(7.5),
-                  child: news.newsImage(
-                    width: 135,
-                    height: 85,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class NewsCard extends StatelessWidget {
   final News news;
   const NewsCard({
@@ -145,10 +75,10 @@ class NewsCard extends StatelessWidget {
             children: [
               ElevatedButton.icon(
                 onPressed: () {},
-                icon: const Icon(Icons.bookmark_border_outlined),
-                label: const Text(
-                  "Bookmark",
-                  style: TextStyle(
+                icon: Icon(news.isBookmarked ? Icons.bookmark_added_rounded : Icons.bookmark_add_rounded),
+                label: Text(
+                  news.isBookmarked ? "Bookmarked" : "Bookmark",
+                  style: const TextStyle(
                     fontSize: 17,
                   ),
                 )

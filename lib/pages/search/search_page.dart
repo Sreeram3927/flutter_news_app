@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_watch/data/news.dart';
-import 'package:news_watch/widgets/news_cards.dart';
+import 'package:news_watch/widgets/news_feed_card.dart';
 import 'package:news_watch/widgets/top_bar.dart';
 
 class SearchPage extends StatefulWidget {
