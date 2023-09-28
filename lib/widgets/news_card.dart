@@ -36,7 +36,7 @@ class NewsCard extends StatelessWidget {
               news.newsOutletLogo(12.5),
               const SizedBox(width: 6),
               Text(
-                news.newsOutlet,
+                news.author,
                 style: const TextStyle(
                   fontSize: 17,
                 ),

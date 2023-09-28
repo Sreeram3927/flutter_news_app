@@ -4,28 +4,38 @@ import 'package:news_watch/widgets/news_card.dart';
 class News {
   final String title;
   final String content;
-  final String newsOutlet;
+  final String author;
   final String timeAgo;
-  final String webUrl;
-  String? imageUrl;
-  String? newsOutletLogoUrl;
+  final String webURL;
+  final String? imageURL;
+  final String? authorLogoURL;
+  final String? authorBigLogoURL;
   bool isBookmarked;
 
   News({
     required this.title,
     required this.content,
-    required this.newsOutlet,
+    required this.author,
     required this.timeAgo,
-    required this.webUrl,
-    this.imageUrl,
-    this.newsOutletLogoUrl,
+    required this.webURL,
+    this.imageURL,
+    this.authorLogoURL,
+    this.authorBigLogoURL,
     this.isBookmarked = false,
-  });
+  }){
+    image = imageURL == null ? null : NetworkImage(imageURL!);
+    authorLogo = authorLogoURL == null ? null : NetworkImage(authorLogoURL!);
+    authorBigLogo = authorBigLogoURL == null ? null : NetworkImage(authorBigLogoURL!);
+  }
+
+  late final NetworkImage? image;
+  late final NetworkImage? authorLogo;
+  late final NetworkImage? authorBigLogo;
 
   Widget newsImage({double? height, required double width}) {
-    if (imageUrl != null) {
+    if (image != null) {
       return Image(
-        image: NetworkImage(imageUrl!),
+        image: image!,
         fit: BoxFit.fitHeight,
         width: width,
         height: height,
@@ -36,9 +46,9 @@ class News {
   }
 
   Widget newsOutletLogo(double radius) {
-    if (newsOutletLogoUrl != null) {
+    if (authorLogo != null) {
       return CircleAvatar(
-        backgroundImage: NetworkImage(newsOutletLogoUrl!),
+        backgroundImage: authorLogo,
         radius: radius,
       );
     } else {

@@ -23,11 +23,11 @@ class _HomePageState extends State<HomePage> {
     return News(
       title: "How to Watch: NASA's OSIRIS-REx Mission Bringing Asteroid Sample Back to Earth After Travelling for 3 Years",
       content: 'OSIRIS-REx was a NASA asteroid-study and sample-return mission that visited and collected samples from 101955 Bennu, a carbonaceous near-Earth asteroid.[12] The material, returned in September 2023,[13] is expected to enable scientists to learn more about the formation and evolution of the Solar System, its initial stages of planet formation, and the source of organic compounds that led to the formation of life on Earth.[14] Following the completion of the primary mission, the spacecraft is planned to conduct proximity operations and in-depth study of asteroid 99942 Apophis as OSIRIS-APEX.[15]',
-      newsOutlet: 'timesnownews',
+      author: 'timesnownews',
       timeAgo: '${index}h',
-      webUrl: 'https://www.example.com',
-      imageUrl: 'https://th.bing.com/th?id=OVFT.gqBmAH9mIZraTqwv8FOKVS&pid=News&w=234&h=132&c=14&rs=2&qlt=90&dpr=1.3',
-      newsOutletLogoUrl: 'https://www.bing.com/th?id=ODF.KANCozAEZYO1NwXNST5YDQ&pid=news&w=16&h=16&c=14&rs=2&qlt=90&dpr=1.3'
+      webURL: 'https://www.example.com',
+      imageURL: 'https://th.bing.com/th?id=OVFT.gqBmAH9mIZraTqwv8FOKVS&pid=News&w=234&h=132&c=14&rs=2&qlt=90&dpr=1.3',
+      authorLogoURL: 'https://www.bing.com/th?id=ODF.KANCozAEZYO1NwXNST5YDQ&pid=news&w=16&h=16&c=14&rs=2&qlt=90&dpr=1.3'
     );
   });
   final int maxCount = 30;
@@ -40,9 +40,9 @@ class _HomePageState extends State<HomePage> {
         return News(
           title: "How to Watch: NASA's OSIRIS-REx Mission Bringing Asteroid Sample Back to Earth After Travelling for 3 Years",
           content: 'OSIRIS-REx was a NASA asteroid-study and sample-return mission that visited and collected samples from 101955 Bennu, a carbonaceous near-Earth asteroid.[12] The material, returned in September 2023,[13] is expected to enable scientists to learn more about the formation and evolution of the Solar System, its initial stages of planet formation, and the source of organic compounds that led to the formation of life on Earth.[14] Following the completion of the primary mission, the spacecraft is planned to conduct proximity operations and in-depth study of asteroid 99942 Apophis as OSIRIS-APEX.[15]',
-          newsOutlet: 'timesnownews',
+          author: 'timesnownews',
           timeAgo: '${index}h',
-          webUrl: 'https://www.example.com',
+          webURL: 'https://www.example.com',
           // imageUrl: 'https://th.bing.com/th?id=OVFT.gqBmAH9mIZraTqwv8FOKVS&pid=News&w=234&h=132&c=14&rs=2&qlt=90&dpr=1.3',
           // newsOutletLogoUrl: 'https://www.bing.com/th?id=ODF.KANCozAEZYO1NwXNST5YDQ&pid=news&w=16&h=16&c=14&rs=2&qlt=90&dpr=1.3'
         );
@@ -105,11 +105,11 @@ class _HomePageState extends State<HomePage> {
                 news: News(
                   title: "How to Watch: NASA's OSIRIS-REx Mission Bringing Asteroid Sample Back to Earth After Travelling for 3 Years",
                   content: 'not for now',
-                  newsOutlet: 'timesnownews',
+                  author: 'timesnownews',
                   timeAgo: '${index}h',
-                  webUrl: 'https://www.example.com',
-                  imageUrl: 'https://th.bing.com/th?id=OVFT.gqBmAH9mIZraTqwv8FOKVS&pid=News&w=234&h=132&c=14&rs=2&qlt=90&dpr=1.3',
-                  newsOutletLogoUrl: 'https://www.bing.com/th?id=ODF.KANCozAEZYO1NwXNST5YDQ&pid=news&w=16&h=16&c=14&rs=2&qlt=90&dpr=1.3'
+                  webURL: 'https://www.example.com',
+                  imageURL: 'https://th.bing.com/th?id=OVFT.gqBmAH9mIZraTqwv8FOKVS&pid=News&w=234&h=132&c=14&rs=2&qlt=90&dpr=1.3',
+                  authorLogoURL: 'https://www.bing.com/th?id=ODF.KANCozAEZYO1NwXNST5YDQ&pid=news&w=16&h=16&c=14&rs=2&qlt=90&dpr=1.3'
                 )
               );
             }),

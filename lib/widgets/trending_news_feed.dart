@@ -48,7 +48,7 @@ class TrendingNewsFeed extends StatelessWidget {
                         news.newsOutletLogo(7),
                         const SizedBox(width: 6),
                         Text(
-                          news.newsOutlet,
+                          news.author,
                           style: const TextStyle(
                             fontSize: 15,
                             color: Colors.white
