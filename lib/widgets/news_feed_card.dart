@@ -46,7 +46,10 @@ class NewsFeedCard extends StatelessWidget {
                           const SizedBox(height: 6),
                           Text(
                             news.title,
-                            style: Theme.of(context).textTheme.titleLarge,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
                           ),
