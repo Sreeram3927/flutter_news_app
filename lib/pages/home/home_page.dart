@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:news_watch/data/news.dart';
+import 'package:news_watch/data/user_settings.dart';
 import 'package:news_watch/pages/home/country_selection.dart';
 import 'package:news_watch/widgets/news_feed_card.dart';
 import 'package:news_watch/widgets/top_bar.dart';
@@ -80,17 +81,17 @@ class _HomePageState extends State<HomePage> {
                   MaterialPageRoute(builder: (context) => const CountrySelectionPage())
                 );
               },
-              child: const Row(
+              child: Row(
                 children: [
                   Text(
-                    'India',
-                    style: TextStyle(
+                    UserSettings.selectedCountry,
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(width: 10),
-                  Icon(Icons.location_pin)
+                  const SizedBox(width: 10),
+                  const Icon(Icons.location_pin)
                 ],
               ),
             )

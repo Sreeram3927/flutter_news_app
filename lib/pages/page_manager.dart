@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_watch/data/web_scraper.dart';
 import 'package:news_watch/pages/bookmarks/bookmark_page.dart';
 import 'package:news_watch/pages/home/home_page.dart';
 import 'package:news_watch/pages/search/search_page.dart';
@@ -38,6 +39,12 @@ class _PageManagerState extends State<PageManager> {
           curve: Curves.easeOutSine
         ),
       ),
+
+  floatingActionButton: const FloatingActionButton(
+    onPressed: BingScraper.getData,
+    child: Icon(Icons.get_app_rounded),
+  ),
+
     );
   }
 }
