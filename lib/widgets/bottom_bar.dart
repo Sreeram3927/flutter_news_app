@@ -25,7 +25,14 @@ class _BottomBarState extends State<BottomBar> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.blueAccent[100]!, width: 1,),
+        border: Border(
+          top: BorderSide(color: Colors.blueAccent[100]!, width: 1),
+          left: BorderSide(color: Colors.blueAccent[100]!, width: 1),
+          right: BorderSide(color: Colors.blueAccent[100]!, width: 1),
+          //The following assertion was thrown during paint():
+          //A borderRadius can only be given on borders with uniform colors and styles.
+          bottom: BorderSide(color: Colors.blueAccent[100]!.withOpacity(1), width: 1),
+        ),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(10),
           topRight: Radius.circular(10),

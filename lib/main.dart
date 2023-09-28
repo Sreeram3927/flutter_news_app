@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_watch/pages/page_manager.dart';
+import 'package:news_watch/theme/theme_settings.dart';
 
 void main() {
   runApp(const MainApp());
@@ -13,10 +14,12 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: const PageManager(),
-      themeMode: ThemeMode.system,
-      theme: ThemeData(
+      themeMode: ThemeMode.light,
+      theme: ThemeSettings.lightMode,
+      darkTheme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: Colors.blue,
+        brightness: Brightness.dark,
         textTheme: GoogleFonts.mavenProTextTheme(),
       ),
     );
