@@ -40,9 +40,9 @@ class _PageManagerState extends State<PageManager> {
         ),
       ),
 
-  floatingActionButton: const FloatingActionButton(
-    onPressed: BingScraper.getData,
-    child: Icon(Icons.get_app_rounded),
+  floatingActionButton: FloatingActionButton(
+    onPressed: () => BingScraper.getData('Science'),
+    child: const Icon(Icons.get_app_rounded),
   ),
 
     );

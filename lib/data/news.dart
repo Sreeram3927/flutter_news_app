@@ -12,6 +12,12 @@ class News {
   final String? authorBigLogoURL;
   bool isBookmarked;
 
+  late final NetworkImage? image;
+  late final NetworkImage? authorLogo;
+  late final NetworkImage? authorBigLogo;
+
+  String baseRelativeURL = 'https://th.bing.com';
+
   News({
     required this.title,
     required this.content,
@@ -23,14 +29,10 @@ class News {
     this.authorBigLogoURL,
     this.isBookmarked = false,
   }){
-    image = imageURL == null ? null : NetworkImage(imageURL!);
-    authorLogo = authorLogoURL == null ? null : NetworkImage(authorLogoURL!);
-    authorBigLogo = authorBigLogoURL == null ? null : NetworkImage(authorBigLogoURL!);
+    image = imageURL == null ? null : NetworkImage('$baseRelativeURL$imageURL');
+    authorLogo = authorLogoURL == null ? null : NetworkImage('$baseRelativeURL$authorLogoURL');
+    authorBigLogo = authorBigLogoURL == null ? null : NetworkImage('$baseRelativeURL$authorBigLogoURL');
   }
-
-  late final NetworkImage? image;
-  late final NetworkImage? authorLogo;
-  late final NetworkImage? authorBigLogo;
 
   Widget newsImage({double? height, required double width}) {
     if (image != null) {
