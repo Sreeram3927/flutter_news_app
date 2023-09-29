@@ -88,12 +88,13 @@ class _NewsCardState extends State<NewsCard> {
             ],
           ),
           const SizedBox(height: 10.0),
-          ElevatedButton(
-            onPressed: () {},
+          ElevatedButton.icon(
+            onPressed: widget.news.visitWebsite,
             style: ButtonStyle(
               fixedSize: MaterialStateProperty.all(const Size(double.maxFinite, 50))
             ),
-            child: const Text(
+            icon: const Icon(Icons.launch_rounded),
+            label: const Text(
               "Visit Website",
               style: TextStyle(
                 fontSize: 17,

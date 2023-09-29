@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_watch/data/user_settings.dart';
 import 'package:news_watch/widgets/news_card.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class News {
   final String title;
@@ -113,6 +114,13 @@ class News {
         return NewsCard(news: this);
       }
     );
+  }
+
+  Future<void> visitWebsite() async {
+    Uri url = Uri.parse(webURL);
+    if (!await launchUrl(url, mode: LaunchMode.inAppWebView)) {
+      throw Exception('Could not launch $url');
+    }
   }
 
   void bookmark() {
