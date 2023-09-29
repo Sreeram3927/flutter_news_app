@@ -29,7 +29,11 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     setState(() => isLoading = true);
     try {
       final data = await BingScraper.getData(country);
-      countryNews = data.map((news) => TrendingNewsFeed(news: news)).toList();
+      countryNews = data
+        .where((news) => news.imageURL != null)
+        .map((news) => TrendingNewsFeed(news: news))
+        .toList()
+      ;
     } catch (e) {
       isError = true;
     }
@@ -127,7 +131,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                   ? [onError()] 
                   : isLoading
                     ? List.generate(3, (index) => const TrendingNewsFeedLoading())
-                    : countryNews.sublist(0, 6)
+                    : countryNews
                   ,
                 options: CarouselOptions(
                   autoPlay: true,
