@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:news_watch/data/news.dart';
+import 'package:news_watch/data/web_scraper.dart';
+import 'package:news_watch/pages/search/searching.dart';
 import 'package:news_watch/widgets/news_feed_card.dart';
+import 'package:news_watch/widgets/title_and_child.dart';
 import 'package:news_watch/widgets/top_bar.dart';
 
 class SearchPage extends StatefulWidget {
@@ -10,10 +13,33 @@ class SearchPage extends StatefulWidget {
   State<SearchPage> createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientMixin{
+
+  @override
+  bool get wantKeepAlive => true;
 
   bool isSearching = false;
+  bool isLoading = true;
   final FocusNode _searchFocusNode = FocusNode();
+  String title = 'Top Stories';
+  late List<News> data;
+
+  void _search(String query) async {
+    setState(() {
+      title = query;
+      isLoading = true;
+    });
+    data = await BingScraper.getData(query);
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _search('Top Stories');
+  }
 
   @override
   void dispose() {
@@ -66,23 +92,12 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
 
-        if(!isSearching) SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-                return NewsFeedCard(news: News(
-                  title: "How to Watch: NASA's OSIRIS-REx Mission Bringing Asteroid Sample Back to Earth After Travelling for 3 Years",
-                  content: 'not for now',
-                  author: 'timesnownews',
-                  timeAgo: '${index}h',
-                  webURL: 'https://www.example.com',
-                  imageURL: 'https://th.bing.com/th?id=OVFT.gqBmAH9mIZraTqwv8FOKVS&pid=News&w=234&h=132&c=14&rs=2&qlt=90&dpr=1.3',
-                  authorLogoURL: 'https://www.bing.com/th?id=ODF.KANCozAEZYO1NwXNST5YDQ&pid=news&w=16&h=16&c=14&rs=2&qlt=90&dpr=1.3'
-                )
-              );
-            },
-            childCount: 10
-          ),
-        ),
+        if(!isLoading) TitleAndChild(
+          title: title,
+          children: data.map((news) => NewsFeedCard(news: news)).toList(),
+        )
+
+        // if (isSearching)
       ],
     );
   }
