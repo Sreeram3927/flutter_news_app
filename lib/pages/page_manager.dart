@@ -18,8 +18,8 @@ class _PageManagerState extends State<PageManager> {
   final PageController pageController = PageController();
 
   final List<Widget> pages = const [
-    HomePage(),
-    SearchPage(),
+    HomePage(key: PageStorageKey('home'),),
+    SearchPage(key: PageStorageKey('search'),),
     BookmarksPage(key: PageStorageKey('bookmarks'),),
     SettingsPage(),
   ];

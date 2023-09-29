@@ -18,7 +18,10 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
+
+  @override
+  get wantKeepAlive => true;
 
   bool isLoading = true;
 
@@ -75,6 +78,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return CustomScrollView(
       slivers: [
         
@@ -112,23 +116,23 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
 
-      //  TitleAndChild(
-      //   title: 'Happening in ${UserSettings.selectedCountry}',
-      //   children: [
-      //     CarouselSlider(
-      //         items: countryNews.map((news) => TrendingNewsFeed(news: news)).toList(),
-      //         options: CarouselOptions(
-      //           autoPlay: true,
-      //           autoPlayInterval: const Duration(seconds: 7),
-      //           enableInfiniteScroll: false,
-      //           aspectRatio: 2.0,
-      //           enlargeCenterPage: true,
-      //           enlargeFactor: 0.215,
-      //           enlargeStrategy: CenterPageEnlargeStrategy.height,
-      //         ),
-      //       )
-      //     ]
-      //   ),
+       TitleAndChild(
+        title: 'Happening in ${UserSettings.selectedCountry}',
+        children: [
+          CarouselSlider(
+              items: countryNews.map((news) => TrendingNewsFeed(news: news)).toList(),
+              options: CarouselOptions(
+                autoPlay: true,
+                autoPlayInterval: const Duration(seconds: 7),
+                enableInfiniteScroll: false,
+                aspectRatio: 2.0,
+                enlargeCenterPage: true,
+                enlargeFactor: 0.215,
+                enlargeStrategy: CenterPageEnlargeStrategy.height,
+              ),
+            )
+          ]
+        ),
 
         ...favourites,
        
