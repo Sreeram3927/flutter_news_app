@@ -1,9 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:news_watch/data/favourites.dart';
 import 'package:news_watch/data/news.dart';
 import 'package:news_watch/data/user_settings.dart';
 import 'package:news_watch/data/web_scraper.dart';
 import 'package:news_watch/pages/home/country_selection.dart';
+import 'package:news_watch/pages/home/favourite_news.dart';
 import 'package:news_watch/widgets/news_feed_card.dart';
 import 'package:news_watch/widgets/title_and_child.dart';
 import 'package:news_watch/widgets/top_bar.dart';
@@ -25,6 +27,11 @@ class _HomePageState extends State<HomePage> {
     setState(() => isLoading = true);
     countryNews = await BingScraper.getData(UserSettings.selectedCountry);
     setState(() => isLoading = false);
+  }
+
+  List<Widget> favourites = [];
+  void _getFavourites() {
+    favourites = UserSettings.userFavourites.map((fav) => FavouriteNews(favourite: fav)).toList();
   }
 
   // final List<News> items = List.generate(10, (index) {
@@ -63,6 +70,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _getCountryNews();
+    _getFavourites();
   }
 
   @override
@@ -104,32 +112,26 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
 
-       TitleAndChild(
-          title: 'Happening in ${UserSettings.selectedCountry}',
-          children: [
-            CarouselSlider(
-                items: countryNews.map((news) => TrendingNewsFeed(news: news)).toList(),
-                options: CarouselOptions(
-                  autoPlay: true,
-                  autoPlayInterval: const Duration(seconds: 7),
-                  enableInfiniteScroll: false,
-                  aspectRatio: 2.0,
-                  enlargeCenterPage: true,
-                  enlargeFactor: 0.215,
-                  enlargeStrategy: CenterPageEnlargeStrategy.height,
-                ),
-              )
-            ]
-          ),
+      //  TitleAndChild(
+      //   title: 'Happening in ${UserSettings.selectedCountry}',
+      //   children: [
+      //     CarouselSlider(
+      //         items: countryNews.map((news) => TrendingNewsFeed(news: news)).toList(),
+      //         options: CarouselOptions(
+      //           autoPlay: true,
+      //           autoPlayInterval: const Duration(seconds: 7),
+      //           enableInfiniteScroll: false,
+      //           aspectRatio: 2.0,
+      //           enlargeCenterPage: true,
+      //           enlargeFactor: 0.215,
+      //           enlargeStrategy: CenterPageEnlargeStrategy.height,
+      //         ),
+      //       )
+      //     ]
+      //   ),
 
-        // TitleAndChild(
-        //   title: 'Trending',
-        //   border: true,
-        //   children: List.generate(2, (index) => NewsFeedCard(news: items[index])),
-        //   onSeeAll: () {
-            
-        //   },
-        // ),
+        ...favourites,
+       
       ],
     );
   }
