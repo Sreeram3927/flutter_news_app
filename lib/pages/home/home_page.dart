@@ -4,6 +4,7 @@ import 'package:news_watch/data/news.dart';
 import 'package:news_watch/data/user_settings.dart';
 import 'package:news_watch/pages/home/country_selection.dart';
 import 'package:news_watch/widgets/news_feed_card.dart';
+import 'package:news_watch/widgets/title_and_child.dart';
 import 'package:news_watch/widgets/top_bar.dart';
 import 'package:news_watch/widgets/trending_news_feed.dart';
 
@@ -16,8 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  final ScrollController horizontalController = ScrollController();
-  final ScrollController verticalController = ScrollController();
+
 
   final List<News> items = List.generate(10, (index) {
     return News(
@@ -52,16 +52,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  void dispose() {
-    horizontalController.dispose();
-    verticalController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return CustomScrollView(
-      controller: verticalController,
       slivers: [
         
         TopBar(
@@ -98,48 +90,40 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
 
-        SliverToBoxAdapter(
-          child: CarouselSlider(
-            items: List.generate(10, (index) {
-              return TrendingNewsFeed(
-                news: News(
-                  title: "How to Watch: NASA's OSIRIS-REx Mission Bringing Asteroid Sample Back to Earth After Travelling for 3 Years",
-                  content: 'not for now',
-                  author: 'timesnownews',
-                  timeAgo: '${index}h',
-                  webURL: 'https://www.example.com',
-                  imageURL: 'https://th.bing.com/th?id=OVFT.gqBmAH9mIZraTqwv8FOKVS&pid=News&w=234&h=132&c=14&rs=2&qlt=90&dpr=1.3',
-                  authorLogoURL: 'https://www.bing.com/th?id=ODF.KANCozAEZYO1NwXNST5YDQ&pid=news&w=16&h=16&c=14&rs=2&qlt=90&dpr=1.3'
-                )
-              );
-            }),
-            options: CarouselOptions(
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 7),
-              enableInfiniteScroll: false,
-              aspectRatio: 2.0,
-              enlargeCenterPage: true,
-              enlargeFactor: 0.215,
-              enlargeStrategy: CenterPageEnlargeStrategy.height,
-            ),
-          )
-        ),
-
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              if (index < items.length) {
-                return NewsFeedCard(news: items[index]);
-              } else if (index == itemCount) {
-                if (itemCount >= maxCount) return null;
-                _loadMoreItems();
-                return const Center(child: CircularProgressIndicator());
-              } else {
-                return null;
-              }
-            },
-            childCount: itemCount + 1
+        TitleAndChild(
+          title: 'Happening in ${UserSettings.selectedCountry}',
+          children: [
+            CarouselSlider(
+                items: List.generate(10, (index) {
+                  return TrendingNewsFeed(
+                    news: News(
+                      title: "How to Watch: NASA's OSIRIS-REx Mission Bringing Asteroid Sample Back to Earth After Travelling for 3 Years",
+                      content: 'not for now',
+                      author: 'timesnownews',
+                      timeAgo: '${index}h',
+                      webURL: 'https://www.example.com',
+                      imageURL: 'https://th.bing.com/th?id=OVFT.gqBmAH9mIZraTqwv8FOKVS&pid=News&w=234&h=132&c=14&rs=2&qlt=90&dpr=1.3',
+                      authorLogoURL: 'https://www.bing.com/th?id=ODF.KANCozAEZYO1NwXNST5YDQ&pid=news&w=16&h=16&c=14&rs=2&qlt=90&dpr=1.3'
+                    )
+                  );
+                }),
+                options: CarouselOptions(
+                  autoPlay: true,
+                  autoPlayInterval: const Duration(seconds: 7),
+                  enableInfiniteScroll: false,
+                  aspectRatio: 2.0,
+                  enlargeCenterPage: true,
+                  enlargeFactor: 0.215,
+                  enlargeStrategy: CenterPageEnlargeStrategy.height,
+                ),
+              )
+            ]
           ),
+
+        TitleAndChild(
+          title: 'Trending',
+          border: true,
+          children: List.generate(2, (index) => NewsFeedCard(news: items[index])),
         ),
       ],
     );
