@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:news_watch/data/news.dart';
 
-class NewsCard extends StatelessWidget {
+class NewsCard extends StatefulWidget {
   final News news;
   const NewsCard({
     super.key,
     required this.news,
   });
 
+  @override
+  State<NewsCard> createState() => _NewsCardState();
+}
+
+class _NewsCardState extends State<NewsCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,23 +31,23 @@ class NewsCard extends StatelessWidget {
           const SizedBox(height: 10.0),
           ClipRRect(
             borderRadius: BorderRadius.circular(7.5),
-            child: news.newsImage(
+            child: widget.news.newsImage(
               width: double.infinity,
             ),
           ),
           const SizedBox(height: 10.0),
           Row(
             children: [
-              news.newsOutletLogo(12.5),
+              widget.news.newsOutletLogo(12.5),
               const SizedBox(width: 6),
               Text(
-                news.author,
+                widget.news.author,
                 style: const TextStyle(
                   fontSize: 17,
                 ),
               ),
               Text(
-                " | ${news.timeAgo}",
+                " | ${widget.news.timeAgo}",
                 style: const TextStyle(
                   fontSize: 17,
                   color: Colors.grey,
@@ -52,7 +57,7 @@ class NewsCard extends StatelessWidget {
           ),
           const SizedBox(height: 10.0),
           Text(
-            news.title,
+            widget.news.title,
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -61,7 +66,7 @@ class NewsCard extends StatelessWidget {
           ),
           const SizedBox(height: 10.0),
           Text(
-            news.content,
+            widget.news.content,
             style: const TextStyle(
               fontSize: 17,
             ),
@@ -74,10 +79,10 @@ class NewsCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ElevatedButton.icon(
-                onPressed: () {},
-                icon: Icon(news.isBookmarked ? Icons.bookmark_added_rounded : Icons.bookmark_add_rounded),
+                onPressed: () => setState(() => widget.news.bookmark()),
+                icon: Icon(widget.news.isBookmarked ? Icons.bookmark_added_rounded : Icons.bookmark_add_rounded),
                 label: Text(
-                  news.isBookmarked ? "Bookmarked" : "Bookmark",
+                  widget.news.isBookmarked ? "Bookmarked" : "Bookmark",
                   style: const TextStyle(
                     fontSize: 17,
                   ),

@@ -49,7 +49,7 @@ class UserSettings {
     final encodedList = bookmarks.map((item) => jsonEncode(item.toJson())).toList();
     _prefs.setStringList('bookmarks', encodedList);
   }
-  List<News> getBookmarks() {
+  static List<News> getBookmarks() {
     final encodedList = _prefs.getStringList('bookmarks') ?? [];
     return encodedList.map((item) => News.fromJson(jsonDecode(item))).toList();
   }

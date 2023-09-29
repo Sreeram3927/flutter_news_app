@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_watch/data/user_settings.dart';
 import 'package:news_watch/widgets/news_card.dart';
 
 class News {
@@ -67,6 +68,20 @@ class News {
         return NewsCard(news: this);
       }
     );
+  }
+
+  void bookmark() {
+    final bookmarks = UserSettings.getBookmarks();
+    if (isBookmarked) {
+      isBookmarked = false;
+      bookmarks.removeWhere((item) {
+        return item.webURL == webURL;
+      });
+    } else {
+      isBookmarked = true;
+      bookmarks.add(this);
+    }
+    UserSettings.saveBookmarks(bookmarks);
   }
 
   Map<String, dynamic> toJson() => {
