@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class TitleAndChild extends StatelessWidget {
   final String title;
+  final Function()? onSeeAll;
   final bool border;
   final List<Widget> children;
   const TitleAndChild({
@@ -9,6 +10,7 @@ class TitleAndChild extends StatelessWidget {
     required this.title,
     required this.children,
     this.border = false,
+    this.onSeeAll,
   });
 
   @override
@@ -35,8 +37,8 @@ class TitleAndChild extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {},
+                  if (onSeeAll != null) TextButton(
+                    onPressed: onSeeAll,
                     child: const Text(
                       'See all',
                       style: TextStyle(

@@ -124,6 +124,9 @@ class _HomePageState extends State<HomePage> {
           title: 'Trending',
           border: true,
           children: List.generate(2, (index) => NewsFeedCard(news: items[index])),
+          onSeeAll: () {
+            
+          },
         ),
       ],
     );
