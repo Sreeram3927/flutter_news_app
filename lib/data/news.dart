@@ -69,4 +69,29 @@ class News {
     );
   }
 
+  Map<String, dynamic> toJson() => {
+    'title' : title,
+    'content' : content,
+    'author' : author,
+    'timeAgo' : timeAgo,
+    'webURL' : webURL,
+    'imageURL' : imageURL,
+    'authorLogoURL' : authorLogoURL,
+    'authorBigLogoURL' : authorBigLogoURL,
+    'isBookmarked' : isBookmarked,
+  };
+
+  factory News.fromJson(Map<String, dynamic> json) {
+  return News(
+    title: json['title'] as String,
+    content: json['content'] as String,
+    author: json['author'] as String,
+    timeAgo: json['timeAgo'] as String,
+    webURL: json['webURL'] as String,
+    imageURL: json['imageURL'] as String?,
+    authorLogoURL: json['authorLogoURL'] as String?,
+    authorBigLogoURL: json['authorBigLogoURL'] as String?,
+    isBookmarked: json['isBookmarked'] as bool,
+  );
+}
 }

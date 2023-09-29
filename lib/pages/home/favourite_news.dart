@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:news_watch/data/favourites.dart';
 import 'package:news_watch/data/news.dart';
+import 'package:news_watch/data/web_scraper.dart';
 import 'package:news_watch/widgets/news_feed_card.dart';
 import 'package:news_watch/widgets/title_and_child.dart';
 
 class FavouriteNews extends StatefulWidget {
-  final Favourites favourite;
+  final String favourite;
   const FavouriteNews({super.key, required this.favourite});
 
   @override
@@ -16,15 +16,15 @@ class _FavouriteNewsState extends State<FavouriteNews> {
   bool isLoading = true;
   late List<News> data;
 
+  void _getData() async {
+    data = await BingScraper.getData(widget.favourite);
+    setState(() => isLoading = false);
+  }
+
   @override
   void initState() {
     super.initState();
-    widget.favourite.getData().then((value) {
-      data = value;
-      setState(() {
-        isLoading = false;
-      });
-    });
+    _getData();
   }
 
   Widget _loading() {
@@ -38,7 +38,7 @@ class _FavouriteNewsState extends State<FavouriteNews> {
   @override
   Widget build(BuildContext context) {
     return isLoading ? _loading() : TitleAndChild(
-        title: widget.favourite.name,
+        title: widget.favourite,
         border: true,
         onSeeAll: () {},
         children: List.generate(2, (index) => NewsFeedCard(news: data[index])).toList(),

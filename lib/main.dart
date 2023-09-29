@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:news_watch/data/user_settings.dart';
 import 'package:news_watch/pages/page_manager.dart';
 import 'package:news_watch/theme/theme_settings.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await UserSettings.localStorageInit();
   runApp(const MainApp());
 }
 

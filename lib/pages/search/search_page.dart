@@ -49,6 +49,7 @@ class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientM
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return CustomScrollView(
       slivers: [
 

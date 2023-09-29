@@ -12,7 +12,7 @@ class BingScraper {
     List<News> data = [];
 
     try {
-      final response = await http.get(Uri.parse('${baseURL}search?q=$query ${UserSettings.selectedCountry}')).timeout(const Duration(seconds: 10));
+      final response = await http.get(Uri.parse('${baseURL}search?q=$query ${UserSettings.getSelectedCountry()}')).timeout(const Duration(seconds: 10));
       
       if (response.statusCode == 200) {
         final document = parse(response.body);

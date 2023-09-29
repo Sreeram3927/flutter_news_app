@@ -1,12 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:news_watch/data/favourites.dart';
 import 'package:news_watch/data/news.dart';
 import 'package:news_watch/data/user_settings.dart';
 import 'package:news_watch/data/web_scraper.dart';
 import 'package:news_watch/pages/home/country_selection.dart';
 import 'package:news_watch/pages/home/favourite_news.dart';
-import 'package:news_watch/widgets/news_feed_card.dart';
 import 'package:news_watch/widgets/title_and_child.dart';
 import 'package:news_watch/widgets/top_bar.dart';
 import 'package:news_watch/widgets/trending_news_feed.dart';
@@ -25,16 +23,17 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
 
   bool isLoading = true;
 
+  String country = UserSettings.getSelectedCountry();
   List<News> countryNews = [];
   Future<void> _getCountryNews() async {
     setState(() => isLoading = true);
-    countryNews = await BingScraper.getData(UserSettings.selectedCountry);
+    countryNews = await BingScraper.getData(country);
     setState(() => isLoading = false);
   }
 
   List<Widget> favourites = [];
   void _getFavourites() {
-    favourites = UserSettings.userFavourites.map((fav) => FavouriteNews(favourite: fav)).toList();
+    favourites = UserSettings.getUserFavourites().map((fav) => FavouriteNews(favourite: fav)).toList();
   }
 
   // final List<News> items = List.generate(10, (index) {
@@ -102,7 +101,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
               child: Row(
                 children: [
                   Text(
-                    UserSettings.selectedCountry,
+                    country,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
@@ -117,7 +116,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
         ),
 
        TitleAndChild(
-        title: 'Happening in ${UserSettings.selectedCountry}',
+        title: 'Happening in $country',
         children: [
           CarouselSlider(
               items: countryNews.map((news) => TrendingNewsFeed(news: news)).toList(),

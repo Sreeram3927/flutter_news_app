@@ -26,10 +26,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 title: const Text('Dark Mode'),
                 leading: const Icon(Icons.dark_mode),
                 trailing: Switch(
-                  value: UserSettings.isDarkMode,
+                  value: UserSettings.getDarkMode(),
                   onChanged: (value) {
                     setState(() {
-                      UserSettings.isDarkMode = value;
+                      UserSettings.setDarkMode(value);
                     });
                   },
                 ),
