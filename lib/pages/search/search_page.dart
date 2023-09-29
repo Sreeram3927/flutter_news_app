@@ -20,8 +20,9 @@ class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientM
 
   bool isSearching = false;
   bool isLoading = true;
+  bool isError = false;
   final FocusNode _searchFocusNode = FocusNode();
-  String title = 'Top Stories';
+  late String title;
   late List<News> data;
 
   Future<void> _search(String query) async {
@@ -29,10 +30,40 @@ class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientM
       title = query;
       isLoading = true;
     });
-    data = await BingScraper.getData(query);
+    try {
+      data = await BingScraper.getData(query);
+    } catch (e) {
+      isError = true;
+    }
     setState(() {
       isLoading = false;
     });
+  }
+
+  Widget onError() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Icon(Icons.signal_wifi_off_rounded),
+          const SizedBox(height: 15),
+          const Text(
+            'Something went wrong',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 15),
+          TextButton(
+            onPressed: () async {
+              await _search(title);
+            },
+            child: const Text('Retry')
+          )
+        ],
+      ),
+    );
   }
 
   @override
@@ -99,9 +130,11 @@ class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientM
     
           TitleAndChild(
             title: title,
-            children: isLoading
-              ? List.generate(10, (index) => const NewsFeedCardLoading())
-              : data.map((news) => NewsFeedCard(news: news)).toList(),
+            children: isError
+              ? [onError()]
+              : isLoading
+                ? List.generate(10, (index) => const NewsFeedCardLoading())
+                : data.map((news) => NewsFeedCard(news: news)).toList(),
           )
     
           // if (isSearching)

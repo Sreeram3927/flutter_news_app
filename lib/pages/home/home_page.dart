@@ -21,13 +21,18 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   get wantKeepAlive => true;
 
   bool isLoading = true;
+  bool isError = false;
 
   String country = UserSettings.getSelectedCountry();
   List<TrendingNewsFeed> countryNews = [];
   Future<void> _getCountryNews() async {
     setState(() => isLoading = true);
-    final data = await BingScraper.getData(country);
-    countryNews = data.map((news) => TrendingNewsFeed(news: news)).toList();
+    try {
+      final data = await BingScraper.getData(country);
+      countryNews = data.map((news) => TrendingNewsFeed(news: news)).toList();
+    } catch (e) {
+      isError = true;
+    }
     setState(() => isLoading = false);
   }
 
@@ -35,6 +40,32 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   void _getFavourites() {
     favourites = UserSettings.getUserFavourites().map((fav) => FavouriteNews(favourite: fav)).toList();
   }
+
+  Widget onError() {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Icon(Icons.signal_wifi_off_rounded),
+          const Text(
+            'Something went wrong',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          TextButton(
+            onPressed: _getCountryNews,
+            child: const Text('Retry')
+          )
+        ],
+      ),
+    );}
 
   @override
   void initState() {
@@ -92,9 +123,12 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
           title: 'Happening in $country',
           children: [
             CarouselSlider(
-                items: isLoading 
-                  ? List.generate(3, (index) => const TrendingNewsFeedLoading())
-                  : countryNews.sublist(0, 6),
+                items: isError
+                  ? [onError()] 
+                  : isLoading
+                    ? List.generate(3, (index) => const TrendingNewsFeedLoading())
+                    : countryNews.sublist(0, 6)
+                  ,
                 options: CarouselOptions(
                   autoPlay: true,
                   autoPlayInterval: const Duration(seconds: 7),
