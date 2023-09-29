@@ -96,8 +96,8 @@ class News {
     return Row(children: topPart);
   }
 
-  void additionalInfo(BuildContext context) {
-    showModalBottomSheet(
+  Future<void> additionalInfo(BuildContext context) async {
+    await showModalBottomSheet(
       context: context,
       useSafeArea: true,
       isScrollControlled: true,

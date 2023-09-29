@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_watch/data/news.dart';
 import 'package:shimmer/shimmer.dart';
 
-class NewsFeedCard extends StatelessWidget {
+class NewsFeedCard extends StatefulWidget {
   final News news;
   const NewsFeedCard({
     super.key,
@@ -10,9 +10,17 @@ class NewsFeedCard extends StatelessWidget {
   });
 
   @override
+  State<NewsFeedCard> createState() => _NewsFeedCardState();
+}
+
+class _NewsFeedCardState extends State<NewsFeedCard> {
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => news.additionalInfo(context),
+      onTap: () async {
+        await widget.news.additionalInfo(context);
+        setState(() { print('done');});
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
         child: Card(
@@ -25,7 +33,7 @@ class NewsFeedCard extends StatelessWidget {
                     Expanded(
                       child: Column(
                         children: [
-                          news.aboutAuthor(
+                          widget.news.aboutAuthor(
                               radius: 7,
                               width: 100,
                               height: 30,
@@ -33,7 +41,7 @@ class NewsFeedCard extends StatelessWidget {
                             ),
                           const SizedBox(height: 6),
                           Text(
-                            news.title,
+                            widget.news.title,
                             style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -47,7 +55,7 @@ class NewsFeedCard extends StatelessWidget {
                     const SizedBox(width: 7.5),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(7.5),
-                      child: news.newsImage(
+                      child: widget.news.newsImage(
                         width: 135,
                         height: 85,
                       ),
@@ -56,7 +64,7 @@ class NewsFeedCard extends StatelessWidget {
                 ),
               ),
 
-              if (news.isBookmarked) Positioned(
+              if (widget.news.isBookmarked) Positioned(
                 top: 15,
                 right: -12,
                 child: Transform.rotate(
