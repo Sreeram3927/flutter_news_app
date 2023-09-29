@@ -19,7 +19,7 @@ class _NewsFeedCardState extends State<NewsFeedCard> {
     return GestureDetector(
       onTap: () async {
         await widget.news.additionalInfo(context);
-        setState(() { print('done');});
+        setState(() {});
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),

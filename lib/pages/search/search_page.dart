@@ -22,6 +22,7 @@ class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientM
   bool isLoading = true;
   bool isError = false;
   final FocusNode _searchFocusNode = FocusNode();
+  final TextEditingController _searchController = TextEditingController();
   late String title;
   late List<News> data;
 
@@ -103,6 +104,7 @@ class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientM
               height: 40,
               child: TextField(
                 focusNode: _searchFocusNode,
+                controller: _searchController,
                 onTap: () {
                   setState(() {
                     isSearching = true;
@@ -114,11 +116,18 @@ class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientM
                     _searchFocusNode.unfocus();
                   });
                 },
+                onSubmitted: (query) {
+                  _searchFocusNode.unfocus();
+                  _search(query);
+                },
                 decoration: InputDecoration(
                   hintText: "Search...",
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.search),
-                    onPressed: () {},
+                    onPressed: () {
+                      _searchFocusNode.unfocus();
+                      _search(_searchController.text);
+                    },
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),

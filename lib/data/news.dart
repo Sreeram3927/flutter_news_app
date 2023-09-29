@@ -30,9 +30,17 @@ class News {
     this.authorBigLogoURL,
     this.isBookmarked = false,
   }){
-    image = imageURL == null ? null : NetworkImage('$baseRelativeURL$imageURL');
-    authorLogo = authorLogoURL == null ? null : NetworkImage('$baseRelativeURL$authorLogoURL');
-    authorBigLogo = authorBigLogoURL == null ? null : NetworkImage('$baseRelativeURL$authorBigLogoURL');
+    image = imageURL == null ? null : fromNetwork(imageURL!);
+    authorLogo = authorLogoURL == null ? null : fromNetwork(authorLogoURL!);
+    authorBigLogo = authorBigLogoURL == null ? null : fromNetwork(authorBigLogoURL!);
+  }
+
+  NetworkImage? fromNetwork(String url) {
+    if (url.contains('bing')){
+      return NetworkImage(url);
+    } else {
+      return NetworkImage('$baseRelativeURL$url');
+    }
   }
 
   Widget newsImage({double? height, required double width}) {
