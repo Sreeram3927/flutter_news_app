@@ -43,26 +43,12 @@ class TrendingNewsFeed extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        news.newsOutletLogo(7),
-                        const SizedBox(width: 6),
-                        Text(
-                          news.author,
-                          style: const TextStyle(
-                            fontSize: 15,
-                            color: Colors.white
-                          ),
-                        ),
-                        Text(
-                          " | ${news.timeAgo}",
-                          style: const TextStyle(
-                            fontSize: 15,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
+                    news.aboutAuthor(
+                        radius: 12.5,
+                        width: 100,
+                        height: 25,
+                        fontSize: 17,
+                      ),
                     const SizedBox(height: 6),
                     Text(
                       news.title,

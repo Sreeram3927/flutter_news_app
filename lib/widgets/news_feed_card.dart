@@ -24,25 +24,12 @@ class NewsFeedCard extends StatelessWidget {
                     Expanded(
                       child: Column(
                         children: [
-                          Row(
-                            children: [
-                              news.newsOutletLogo(7),
-                              const SizedBox(width: 6),
-                              Text(
-                                news.author,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                ),
-                              ),
-                              Text(
-                                " | ${news.timeAgo}",
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
+                          news.aboutAuthor(
+                              radius: 7,
+                              width: 100,
+                              height: 30,
+                              fontSize: 15,
+                            ),
                           const SizedBox(height: 6),
                           Text(
                             news.title,

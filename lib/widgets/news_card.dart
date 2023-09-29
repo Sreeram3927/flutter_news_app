@@ -36,25 +36,12 @@ class _NewsCardState extends State<NewsCard> {
             ),
           ),
           const SizedBox(height: 10.0),
-          Row(
-            children: [
-              widget.news.newsOutletLogo(12.5),
-              const SizedBox(width: 6),
-              Text(
-                widget.news.author,
-                style: const TextStyle(
-                  fontSize: 17,
-                ),
-              ),
-              Text(
-                " | ${widget.news.timeAgo}",
-                style: const TextStyle(
-                  fontSize: 17,
-                  color: Colors.grey,
-                ),
-              ),
-            ],
-          ),
+          widget.news.aboutAuthor(
+              radius: 12.5,
+              width: 125,
+              height: 30,
+              fontSize: 17,
+            ),
           const SizedBox(height: 10.0),
           Text(
             widget.news.title,

@@ -48,15 +48,48 @@ class News {
     }
   }
 
-  Widget newsOutletLogo(double radius) {
+  Widget aboutAuthor({
+    required double radius,
+    required double width,
+    required double height,
+    required double fontSize,
+  }) {
+
+    List<Widget> topPart = [];
+    
     if (authorLogo != null) {
-      return CircleAvatar(
+      topPart.add(CircleAvatar(
         backgroundImage: authorLogo,
         radius: radius,
-      );
+      ));
+      topPart.addAll([
+        const SizedBox(width: 6),
+        Text(
+          author,
+          style: TextStyle(
+            fontSize: fontSize
+          ),
+        ),
+      ]);
+    } else if (authorBigLogo != null) {
+      topPart.add(Image(
+        image: authorBigLogo!,
+        width: width,
+        height: height,
+      ));
     } else {
-      return const SizedBox.shrink();
+      topPart.add(const SizedBox.shrink());
     }
+    
+    topPart.add(Text(
+      " | $timeAgo",
+      style: TextStyle(
+        fontSize: fontSize,
+        color: Colors.grey,
+      ),
+    ));
+
+    return Row(children: topPart);
   }
 
   void additionalInfo(BuildContext context) {
