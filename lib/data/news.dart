@@ -64,10 +64,14 @@ class News {
       ));
       topPart.addAll([
         const SizedBox(width: 6),
-        Text(
-          author,
-          style: TextStyle(
-            fontSize: fontSize
+        SizedBox(
+          width: 100,
+          child: Text(
+            author,
+            style: TextStyle(
+              fontSize: fontSize
+            ),
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ]);
