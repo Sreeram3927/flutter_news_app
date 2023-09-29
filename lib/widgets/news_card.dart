@@ -76,7 +76,7 @@ class _NewsCardState extends State<NewsCard> {
                 )
               ),
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: widget.news.shareNews,
                 icon: const Icon(Icons.share_rounded),
                 label: const Text(
                   "Share",

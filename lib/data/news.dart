@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_watch/data/user_settings.dart';
 import 'package:news_watch/widgets/news_card.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class News {
@@ -114,6 +115,10 @@ class News {
         return NewsCard(news: this);
       }
     );
+  }
+
+  Future<void> shareNews() async {
+    await Share.share('$title\n\n$webURL');
   }
 
   Future<void> visitWebsite() async {
