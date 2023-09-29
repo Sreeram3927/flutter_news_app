@@ -7,12 +7,16 @@ class BingScraper {
 
   static String baseURL = 'https://www.bing.com/news/';
 
-  static Future<List<News>> getData(String query) async {
+  static Future<List<News>> getData({required String query, bool addCountry = false}) async {
 
     List<News> data = [];
 
+    if (addCountry) {
+      query += ' ${UserSettings.getSelectedCountry()}';
+    }
+
     try {
-      final response = await http.get(Uri.parse('${baseURL}search?q=$query ${UserSettings.getSelectedCountry()}')).timeout(const Duration(seconds: 10));
+      final response = await http.get(Uri.parse('${baseURL}search?q=$query')).timeout(const Duration(seconds: 10));
       
       if (response.statusCode == 200) {
         final document = parse(response.body);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class TitleAndChild extends StatelessWidget {
   final String title;
+  final double? width;
   final Function()? onSeeAll;
   final bool border;
   final List<Widget> children;
@@ -9,6 +10,7 @@ class TitleAndChild extends StatelessWidget {
     super.key,
     required this.title,
     required this.children,
+    this.width,
     this.border = false,
     this.onSeeAll,
   });
@@ -30,11 +32,15 @@ class TitleAndChild extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
+                  SizedBox(
+                    width: width,
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   if (onSeeAll != null) TextButton(

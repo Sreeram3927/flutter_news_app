@@ -20,7 +20,7 @@ class _FavouriteNewsState extends State<FavouriteNews> {
   void _getData() async {
     setState(() => isLoading = true);
     try {
-      data = await BingScraper.getData(widget.favourite);
+      data = await BingScraper.getData(query: widget.favourite, addCountry: true);
     } catch (e) {
       isError = true;
     }

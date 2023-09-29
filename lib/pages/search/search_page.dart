@@ -16,7 +16,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientMixin{
 
   @override
-  bool get wantKeepAlive => true;
+  bool get wantKeepAlive => false;
 
   bool isSearching = false;
   bool isLoading = true;
@@ -32,7 +32,7 @@ class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientM
       isLoading = true;
     });
     try {
-      data = await BingScraper.getData(query);
+      data = await BingScraper.getData(query: query);
     } catch (e) {
       isError = true;
     }

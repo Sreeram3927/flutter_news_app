@@ -39,12 +39,6 @@ class _PageManagerState extends State<PageManager> {
           curve: Curves.easeOutSine
         ),
       ),
-
-  floatingActionButton: FloatingActionButton(
-    onPressed: () => BingScraper.getData('Science'),
-    child: const Icon(Icons.get_app_rounded),
-  ),
-
     );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:news_watch/data/user_settings.dart';
 import 'package:news_watch/data/web_scraper.dart';
-import 'package:news_watch/pages/home/country_selection.dart';
 import 'package:news_watch/pages/home/favourite_news.dart';
 import 'package:news_watch/widgets/title_and_child.dart';
 import 'package:news_watch/widgets/top_bar.dart';
@@ -18,17 +18,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
 
   @override
-  get wantKeepAlive => true;
+  get wantKeepAlive => false;
 
   bool isLoading = true;
   bool isError = false;
 
   String country = UserSettings.getSelectedCountry();
   List<TrendingNewsFeed> countryNews = [];
-  Future<void> _getCountryNews() async {
+  Future<void> getCountryNews() async {
     setState(() => isLoading = true);
     try {
-      final data = await BingScraper.getData(country);
+      final data = await BingScraper.getData(query: country);
       countryNews = data
         .where((news) => news.imageURL != null)
         .map((news) => TrendingNewsFeed(news: news))
@@ -41,8 +41,8 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   }
 
   List<Widget> favourites = [];
-  void _getFavourites() {
-    favourites = UserSettings.getUserFavourites().map((fav) => FavouriteNews(favourite: fav)).toList();
+  void getFavourites() {
+    setState(() => favourites = UserSettings.getUserFavourites().map((fav) => FavouriteNews(favourite: fav)).toList());
   }
 
   Widget onError() {
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
             ),
           ),
           TextButton(
-            onPressed: _getCountryNews,
+            onPressed: getCountryNews,
             child: const Text('Retry')
           )
         ],
@@ -74,8 +74,8 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   @override
   void initState() {
     super.initState();
-    _getCountryNews();
-    _getFavourites();
+    getCountryNews();
+    getFavourites();
   }
 
   @override
@@ -83,8 +83,8 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     super.build(context);
     return RefreshIndicator(
       onRefresh: () async {
-        await _getCountryNews();
-        setState(() => _getFavourites());
+        await getCountryNews();
+        setState(() => getFavourites());
       },
       child: CustomScrollView(
         slivers: [
@@ -101,18 +101,28 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
             actions: [
               OutlinedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const CountrySelectionPage())
+                  showCountryPicker(
+                    context: context,
+                    onSelect: (country) {
+                      UserSettings.setSelectedCountry(country.name);
+                      setState(() {
+                        this.country = country.name;
+                        getCountryNews();
+                      });
+                    },
                   );
                 },
                 child: Row(
                   children: [
-                    Text(
-                      country,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                    SizedBox(
+                      width: 75,
+                      child: Text(
+                        country,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -125,6 +135,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     
          TitleAndChild(
           title: 'Happening in $country',
+          width: MediaQuery.of(context).size.width * 0.9,
           children: [
             CarouselSlider(
                 items: isError
