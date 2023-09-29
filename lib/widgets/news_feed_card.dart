@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_watch/data/news.dart';
+import 'package:shimmer/shimmer.dart';
 
 class NewsFeedCard extends StatelessWidget {
   final News news;
@@ -82,6 +83,60 @@ class NewsFeedCard extends StatelessWidget {
                     ),
                   ),
                 ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class NewsFeedCardLoading extends StatelessWidget {
+  const NewsFeedCardLoading({super.key});
+
+  Widget _myShimmer({required double width, required double height}) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey[300]!,
+        highlightColor: Colors.grey[100]!,
+        child: Container(
+          width: width,
+          height: height,
+          color: Colors.white,
+        )
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    _myShimmer(width: 150, height: 15),
+                    const SizedBox(height: 6),
+                    _myShimmer(width: double.infinity, height: 18),
+                    const SizedBox(height: 6),
+                    _myShimmer(width: double.infinity, height: 18),
+                    const SizedBox(height: 6),
+                    _myShimmer(width: double.infinity, height: 18),
+
+                  ],
+                ),
+              ),
+              const SizedBox(width: 7.5),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(7.5),
+                child: _myShimmer(width: 135, height: 85)
               ),
             ],
           ),

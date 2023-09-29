@@ -46,63 +46,71 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return CustomScrollView(
-      slivers: [
-        
-        TopBar(
-          title: const Text(
-            'News Watch',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
+    return RefreshIndicator(
+      onRefresh: () async {
+        await _getCountryNews();
+        setState(() => _getFavourites());
+      },
+      child: CustomScrollView(
+        slivers: [
+          
+          TopBar(
+            title: const Text(
+              'News Watch',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
-
-          actions: [
-            OutlinedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const CountrySelectionPage())
-                );
-              },
-              child: Row(
-                children: [
-                  Text(
-                    country,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+    
+            actions: [
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const CountrySelectionPage())
+                  );
+                },
+                child: Row(
+                  children: [
+                    Text(
+                      country,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  const Icon(Icons.location_pin)
-                ],
-              ),
-            )
-          ],
-        ),
-
-       TitleAndChild(
-        title: 'Happening in $country',
-        children: [
-          CarouselSlider(
-              items: countryNews.sublist(0, 6),
-              options: CarouselOptions(
-                autoPlay: true,
-                autoPlayInterval: const Duration(seconds: 7),
-                aspectRatio: 2.0,
-                enlargeCenterPage: true,
-                enlargeFactor: 0.215,
-                enlargeStrategy: CenterPageEnlargeStrategy.height,
-              ),
-            )
-          ]
-        ),
-
-        ...favourites,
-       
-      ],
+                    const SizedBox(width: 10),
+                    const Icon(Icons.location_pin)
+                  ],
+                ),
+              )
+            ],
+          ),
+    
+         TitleAndChild(
+          title: 'Happening in $country',
+          children: [
+            CarouselSlider(
+                items: isLoading 
+                  ? List.generate(3, (index) => const TrendingNewsFeedLoading())
+                  : countryNews.sublist(0, 6),
+                options: CarouselOptions(
+                  autoPlay: true,
+                  autoPlayInterval: const Duration(seconds: 7),
+                  aspectRatio: 2.0,
+                  enlargeCenterPage: true,
+                  enlargeFactor: 0.215,
+                  enlargeStrategy: CenterPageEnlargeStrategy.height,
+                ),
+              )
+            ]
+          ),
+    
+          ...favourites,
+         
+        ],
+      ),
     );
   }
 }

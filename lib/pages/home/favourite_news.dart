@@ -27,21 +27,15 @@ class _FavouriteNewsState extends State<FavouriteNews> {
     _getData();
   }
 
-  Widget _loading() {
-    return const SliverToBoxAdapter(
-      child: Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return isLoading ? _loading() : TitleAndChild(
+    return TitleAndChild(
         title: widget.favourite,
         border: true,
         onSeeAll: () {},
-        children: List.generate(2, (index) => NewsFeedCard(news: data[index])).toList(),
+        children: isLoading
+          ? List.generate(2, (index) => const NewsFeedCardLoading())
+          : List.generate(2, (index) => NewsFeedCard(news: data[index])).toList(),
     );
   }
 }

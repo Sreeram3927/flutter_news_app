@@ -24,7 +24,7 @@ class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientM
   String title = 'Top Stories';
   late List<News> data;
 
-  void _search(String query) async {
+  Future<void> _search(String query) async {
     setState(() {
       title = query;
       isLoading = true;
@@ -50,56 +50,63 @@ class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientM
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return CustomScrollView(
-      slivers: [
-
-        TopBar(
-          leading: isSearching ? IconButton(
-            splashColor: Colors.blue[300],
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              setState(() {
-                isSearching = false;
-                _searchFocusNode.unfocus();
-              });
-            },
-          ) : null,
-          title: SizedBox(
-            height: 40,
-            child: TextField(
-              focusNode: _searchFocusNode,
-              onTap: () {
-                setState(() {
-                  isSearching = true;
-                });
-              },
-              onTapOutside: (event) {
+    return RefreshIndicator(
+      onRefresh: () async {
+        await _search(title);
+      },
+      child: CustomScrollView(
+        slivers: [
+    
+          TopBar(
+            leading: isSearching ? IconButton(
+              splashColor: Colors.blue[300],
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
                 setState(() {
                   isSearching = false;
                   _searchFocusNode.unfocus();
                 });
               },
-              decoration: InputDecoration(
-                hintText: "Search...",
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.search),
-                  onPressed: () {},
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
+            ) : null,
+            title: SizedBox(
+              height: 40,
+              child: TextField(
+                focusNode: _searchFocusNode,
+                onTap: () {
+                  setState(() {
+                    isSearching = true;
+                  });
+                },
+                onTapOutside: (event) {
+                  setState(() {
+                    isSearching = false;
+                    _searchFocusNode.unfocus();
+                  });
+                },
+                decoration: InputDecoration(
+                  hintText: "Search...",
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: () {},
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-
-        if(!isLoading) TitleAndChild(
-          title: title,
-          children: data.map((news) => NewsFeedCard(news: news)).toList(),
-        )
-
-        // if (isSearching)
-      ],
+    
+          TitleAndChild(
+            title: title,
+            children: isLoading
+              ? List.generate(10, (index) => const NewsFeedCardLoading())
+              : data.map((news) => NewsFeedCard(news: news)).toList(),
+          )
+    
+          // if (isSearching)
+        ],
+      ),
     );
   }
 }
