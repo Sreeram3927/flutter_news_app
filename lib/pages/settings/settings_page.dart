@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_watch/data/user_settings.dart';
+import 'package:news_watch/pages/settings/settings_functions.dart';
 import 'package:news_watch/widgets/top_bar.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -60,7 +61,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
 
               ListTile(
-                title: const Text('Licenses'),
+                title: const Text('Open Source Licenses'),
                 leading: const Icon(Icons.gavel_rounded),
                 onTap: () {
                   
@@ -71,8 +72,18 @@ class _SettingsPageState extends State<SettingsPage> {
                 title: const Text('Clear Bookmarks'),
                 textColor: Colors.red,
                 leading: const Icon(Icons.delete_rounded, color: Colors.red,),
-                onTap: () {
-                  
+                onTap: () async {
+                  final data = await showDialog(
+                    context: context,
+                    builder: clearBookmarks,
+                  );
+                  if (data == 'clear') {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Bookmarks cleared'),
+                      ),
+                    );
+                  }
                 },
               ),
 
@@ -80,8 +91,18 @@ class _SettingsPageState extends State<SettingsPage> {
                 title: const Text('Clear Data'),
                 textColor: Colors.red,
                 leading: const Icon(Icons.delete_forever_rounded, color: Colors.red,),
-                onTap: () {
-                  
+                onTap: () async {
+                  final data = await showDialog(
+                    context: context,
+                    builder: clearData,
+                  );
+                  if (data == 'clear') {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Bookmarks cleared'),
+                      ),
+                    );
+                  }
                 },
               ),
 
