@@ -39,7 +39,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
           },
           children: [
 
-              WelcomePage(nextScreen: nextScreen),
+            WelcomePage(nextScreen: nextScreen),
+
+            DataSelectionPage(),
 
           ],
         ),
