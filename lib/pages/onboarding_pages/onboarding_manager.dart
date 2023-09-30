@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:news_watch/data/user_settings.dart';
 import 'package:news_watch/pages/onboarding_pages/onboarding_pages.dart';
+import 'package:news_watch/pages/page_manager.dart';
 
 
 class OnboardingPage extends StatefulWidget {
@@ -23,6 +25,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   void startApp() {
+    UserSettings.setShowHome(true);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const PageManager(),
+      ),
+    );
   }
 
   @override
@@ -41,7 +50,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
             WelcomePage(nextScreen: nextScreen),
 
-            DataSelectionPage(),
+            DataSelectionPage(nextScreen: startApp),
 
           ],
         ),

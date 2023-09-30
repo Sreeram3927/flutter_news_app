@@ -13,6 +13,12 @@ class UserSettings {
     await _prefs.clear();
   }
 
+  static Future<void> setShowHome(bool value) async {
+    await _prefs.setBool('showHome', value);
+  }
+  static getShowHome() {
+    return _prefs.getBool('showHome');
+  }
 
   static Future<void> setDarkMode(bool value) async {
     await _prefs.setBool('isDarkMode', value);

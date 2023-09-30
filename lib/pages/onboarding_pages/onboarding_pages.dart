@@ -1,7 +1,6 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:news_watch/data/user_settings.dart';
-import 'package:news_watch/pages/page_manager.dart';
 
 
 class WelcomePage extends StatelessWidget {
@@ -69,7 +68,11 @@ class WelcomePage extends StatelessWidget {
 
 
 class DataSelectionPage extends StatefulWidget {
-  const DataSelectionPage({super.key});
+  final Function() nextScreen;
+  const DataSelectionPage({
+    super.key,
+    required this.nextScreen,
+  });
 
   @override
   State<DataSelectionPage> createState() => _DataSelectionPageState();
@@ -168,16 +171,9 @@ class _DataSelectionPageState extends State<DataSelectionPage> {
               child: ElevatedButton(
                 onPressed: () {
                   if (country != null && selectedTopics.length >= 3) {
-            
                     UserSettings.setSelectedCountry(country!);
                     UserSettings.setUserFavourites(selectedTopics);
-            
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const PageManager(),
-                      ),
-                    );
+                    widget.nextScreen();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text('Please select a country and at least three favorite topics.'),

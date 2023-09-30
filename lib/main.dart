@@ -7,16 +7,18 @@ import 'package:news_watch/pages/page_manager.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await UserSettings.localStorageInit();
-  runApp(const MainApp());
+  runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  MainApp({super.key});
+
+  final bool showHome = UserSettings.getShowHome() ?? false;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const OnboardingPage(),
+      home: showHome ? const PageManager() : const OnboardingPage(),
       themeMode: ThemeMode.light,
       theme: ThemeData(
         useMaterial3: true,
