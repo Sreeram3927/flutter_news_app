@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_watch/data/user_settings.dart';
+import 'package:news_watch/pages/onboarding_pages/onboarding_manager.dart';
 import 'package:news_watch/pages/page_manager.dart';
 
 void main() async {
@@ -15,7 +16,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const PageManager(),
+      home: const OnboardingPage(),
       themeMode: ThemeMode.light,
       theme: ThemeData(
         useMaterial3: true,
