@@ -99,7 +99,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   if (data == 'clear') {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('Bookmarks cleared'),
+                        content: Text('Data cleared'),
                       ),
                     );
                   }

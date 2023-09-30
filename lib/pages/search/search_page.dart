@@ -25,13 +25,13 @@ class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientM
   late String title;
   late List<News> data;
 
-  Future<void> _search(String query) async {
+  Future<void> _search(String query, bool addCountry) async {
     setState(() {
       title = query;
       isLoading = true;
     });
     try {
-      data = await BingScraper.getData(query: query);
+      data = await BingScraper.getData(query: query, addCountry: addCountry);
     } catch (e) {
       isError = true;
     }
@@ -57,7 +57,7 @@ class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientM
           const SizedBox(height: 15),
           TextButton(
             onPressed: () async {
-              await _search(title);
+              await _search(title, false);
             },
             child: const Text('Retry')
           )
@@ -69,7 +69,7 @@ class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientM
   @override
   void initState() {
     super.initState();
-    _search('Top Stories');
+    _search('Latest news', true);
   }
 
   @override
@@ -83,7 +83,7 @@ class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientM
     super.build(context);
     return RefreshIndicator(
       onRefresh: () async {
-        await _search(title);
+        await _search(title, false);
       },
       child: CustomScrollView(
         slivers: [
@@ -117,7 +117,7 @@ class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientM
                 },
                 onSubmitted: (query) {
                   _searchFocusNode.unfocus();
-                  _search(query);
+                  _search(query, false);
                 },
                 decoration: InputDecoration(
                   hintText: "Search...",
@@ -125,7 +125,7 @@ class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientM
                     icon: const Icon(Icons.search),
                     onPressed: () {
                       _searchFocusNode.unfocus();
-                      _search(_searchController.text);
+                      _search(_searchController.text, false);
                     },
                   ),
                   border: OutlineInputBorder(

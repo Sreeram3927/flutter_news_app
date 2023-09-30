@@ -42,10 +42,7 @@ class _NewsFeedCardState extends State<NewsFeedCard> {
                           const SizedBox(height: 6),
                           Text(
                             widget.news.title,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: Theme.of(context).textTheme.titleLarge,
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
                           ),
