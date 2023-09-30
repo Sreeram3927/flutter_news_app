@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_watch/data/user_settings.dart';
 import 'package:news_watch/pages/settings/settings_functions.dart';
 import 'package:news_watch/widgets/top_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -24,19 +25,6 @@ class _SettingsPageState extends State<SettingsPage> {
             [
 
               ListTile(
-                title: const Text('Dark Mode'),
-                leading: const Icon(Icons.dark_mode),
-                trailing: Switch(
-                  value: UserSettings.getDarkMode(),
-                  onChanged: (value) {
-                    setState(() {
-                      UserSettings.setDarkMode(value);
-                    });
-                  },
-                ),
-              ),
-
-              ListTile(
                 title: const Text('Manage Favourites'),
                 leading: const Icon(Icons.favorite_rounded),
                 onTap: () {
@@ -55,8 +43,11 @@ class _SettingsPageState extends State<SettingsPage> {
               ListTile(
                 title: const Text('Source Code'),
                 leading: const Icon(Icons.code_rounded),
-                onTap: () {
-                  
+                onTap: () async {
+                  final url = Uri.parse('https://github.com/Sreeram3927/flutter_news_app');
+                  if (!await launchUrl(url, mode: LaunchMode.inAppWebView)) {
+                    throw Exception('Could not launch $url');
+                  }
                 },
               ),
 
