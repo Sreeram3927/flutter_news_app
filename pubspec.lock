@@ -128,6 +128,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: "direct main"
+    description:
+      path: "C:/my_dependencies/font_awesome_flutter"
+      relative: false
+    source: path
+    version: "10.5.1"
   google_fonts:
     dependency: "direct main"
     description:

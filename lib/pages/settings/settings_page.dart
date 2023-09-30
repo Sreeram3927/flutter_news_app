@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:news_watch/data/user_settings.dart';
 import 'package:news_watch/pages/onboarding_pages/onboarding_pages.dart';
 import 'package:news_watch/pages/settings/settings_functions.dart';
 import 'package:news_watch/widgets/top_bar.dart';
@@ -64,10 +63,10 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
 
               ListTile(
-                title: const Text('Help'),
-                leading: const Icon(Icons.help_rounded),
+                title: const Text('Contact Developer'),
+                leading: const Icon(Icons.headset_mic_rounded),
                 onTap:() {
-                  
+                  showDialog(context: context, builder: (context) => contactDeveloper());
                 },
               ),
 
