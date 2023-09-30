@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_watch/data/news.dart';
 import 'package:news_watch/data/web_scraper.dart';
-import 'package:news_watch/pages/search/searching.dart';
 import 'package:news_watch/widgets/news_feed_card.dart';
 import 'package:news_watch/widgets/title_and_child.dart';
 import 'package:news_watch/widgets/top_bar.dart';
@@ -13,7 +12,7 @@ class SearchPage extends StatefulWidget {
   State<SearchPage> createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientMixin{
+class _SearchPageState extends State<SearchPage>  with AutomaticKeepAliveClientMixin {
 
   @override
   bool get wantKeepAlive => false;

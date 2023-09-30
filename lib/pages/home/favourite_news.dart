@@ -3,16 +3,20 @@ import 'package:news_watch/data/news.dart';
 import 'package:news_watch/data/web_scraper.dart';
 import 'package:news_watch/widgets/news_feed_card.dart';
 import 'package:news_watch/widgets/title_and_child.dart';
+import 'package:news_watch/widgets/top_bar.dart';
 
-class FavouriteNews extends StatefulWidget {
+class FavouriteNewsCard extends StatefulWidget {
   final String favourite;
-  const FavouriteNews({super.key, required this.favourite});
+  const FavouriteNewsCard({
+    super.key,
+    required this.favourite,
+  });
 
   @override
-  State<FavouriteNews> createState() => _FavouriteNewsState();
+  State<FavouriteNewsCard> createState() => _FavouriteNewsCardState();
 }
 
-class _FavouriteNewsState extends State<FavouriteNews> {
+class _FavouriteNewsCardState extends State<FavouriteNewsCard> {
   bool isLoading = true;
   bool isError = false;
   late List<News> data;
@@ -61,7 +65,32 @@ class _FavouriteNewsState extends State<FavouriteNews> {
     return TitleAndChild(
         title: widget.favourite,
         border: true,
-        onSeeAll: () {},
+        onSeeAll: () {
+          Navigator.push(
+            context,
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) {
+                return FavouriteNewsPage(
+                  name: widget.favourite,
+                  news: data,
+                );
+              },
+              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                const begin = Offset(0.0, 1.0);
+                const end = Offset.zero;
+                const curve = Curves.easeInOut;
+
+                var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                var offsetAnimation = animation.drive(tween);
+
+                return SlideTransition(
+                  position: offsetAnimation,
+                  child: child,
+                );
+              },
+            ),
+          );
+        },
         children: isError
           ? [onError()]
           : isLoading
@@ -69,5 +98,35 @@ class _FavouriteNewsState extends State<FavouriteNews> {
             : List.generate(2, (index) => NewsFeedCard(news: data[index])).toList()
           ,
       );
+  }
+}
+
+
+class FavouriteNewsPage extends StatelessWidget {
+  final String name;
+  final List<News> news;
+  const FavouriteNewsPage({
+    super.key,
+    required this.name,
+    required this.news,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          TopBar(
+            title: Text(name),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) => NewsFeedCard(news: news[index]),
+              childCount: news.length,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

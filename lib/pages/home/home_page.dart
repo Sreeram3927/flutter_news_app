@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
 
   List<Widget> favourites = [];
   void getFavourites() {
-    setState(() => favourites = UserSettings.getUserFavourites().map((fav) => FavouriteNews(favourite: fav)).toList());
+    setState(() => favourites = UserSettings.getUserFavourites().map((fav) => FavouriteNewsCard(favourite: fav)).toList());
   }
 
   Widget onError() {
@@ -108,6 +108,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                       setState(() {
                         this.country = country.name;
                         getCountryNews();
+                        getFavourites();
                       });
                     },
                   );

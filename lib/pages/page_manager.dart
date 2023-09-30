@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:news_watch/data/web_scraper.dart';
 import 'package:news_watch/pages/bookmarks/bookmark_page.dart';
 import 'package:news_watch/pages/home/home_page.dart';
 import 'package:news_watch/pages/search/search_page.dart';

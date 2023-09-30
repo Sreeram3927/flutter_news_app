@@ -35,6 +35,12 @@ class News {
     image = imageURL == null ? null : fromNetwork(imageURL!);
     authorLogo = authorLogoURL == null ? null : fromNetwork(authorLogoURL!);
     authorBigLogo = authorBigLogoURL == null ? null : fromNetwork(authorBigLogoURL!);
+    for (var element in UserSettings.getBookmarks()) {
+      if (element.webURL == webURL) {
+        isBookmarked = true;
+        break;
+      }
+    }
   }
 
   NetworkImage? fromNetwork(String url) {
