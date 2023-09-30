@@ -29,24 +29,20 @@ class _BookmarksPageState extends State<BookmarksPage> with AutomaticKeepAliveCl
   //   );
   // });
 
-  bool isLoading = true;
-  late List<News> bookmarks;
-  void _getBookmarks() {
-    bookmarks = UserSettings.getBookmarks();
-    setState(() => isLoading = false);
-  }
+  List<News> bookmarks = UserSettings.getBookmarks();
 
   Widget emptyData() {
-    return const Center(
-      child: CircularProgressIndicator(),
+    return const SliverFillRemaining(
+      child: Center(
+        child: Text(
+          'No Bookmarks',
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.w500
+          ),
+        ),
+      ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _getBookmarks();
-    print(bookmarks);
   }
 
   @override
@@ -57,7 +53,7 @@ class _BookmarksPageState extends State<BookmarksPage> with AutomaticKeepAliveCl
         const TopBar(
           title: Text("Bookmarks"),
         ),
-        bookmarks == [] ? emptyData() : SliverList(
+        bookmarks.isEmpty ? emptyData() : SliverList(
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
               return NewsFeedCard(news: bookmarks[index]);
