@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+//this widget is used to display the title and the children
 class TitleAndChild extends StatelessWidget {
   final String title;
   final double? width;
@@ -17,9 +19,12 @@ class TitleAndChild extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //use sliverToBoxAdapter if parent widget requires a sliver
     return SliverToBoxAdapter(
       child: Container(
+        //add margin to the container if border is true
         margin: border ? const EdgeInsets.all(10) : null,
+        //add decoration to the container if border is true
         decoration: border ? BoxDecoration(
           border: Border.all(color: Colors.grey[500]!),
           borderRadius: BorderRadius.circular(10),
@@ -27,13 +32,14 @@ class TitleAndChild extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
+            Padding( //add padding to the widget
               padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
                     width: width,
+                    //show the title of the widget
                     child: Text(
                       title,
                       style: const TextStyle(
@@ -43,8 +49,9 @@ class TitleAndChild extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
+                  //show the see all button if onSeeAll functoin is not null
                   if (onSeeAll != null) TextButton(
-                    onPressed: onSeeAll,
+                    onPressed: onSeeAll, //call the onSeeAll function when the user taps on the button
                     child: const Text(
                       'See all',
                       style: TextStyle(
@@ -56,7 +63,9 @@ class TitleAndChild extends StatelessWidget {
                 ],
               ),
             ),
-            const Divider(),
+            const Divider(), //add a divider to divide children from the title
+            //show all the children
+            //... is used to add all the children to this list
             ...children,
           ],
         ),

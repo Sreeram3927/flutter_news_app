@@ -4,6 +4,8 @@ import 'package:news_watch/data/user_settings.dart';
 import 'package:news_watch/widgets/news_feed_card.dart';
 import 'package:news_watch/widgets/top_bar.dart';
 
+
+//this page shows all the bookmarked news of the user
 class BookmarksPage extends StatefulWidget {
   const BookmarksPage({super.key});
 
@@ -13,6 +15,8 @@ class BookmarksPage extends StatefulWidget {
 
 class _BookmarksPageState extends State<BookmarksPage> with AutomaticKeepAliveClientMixin {
 
+  //this is used to make sure that the page does not stay in alive
+  //meaning the page gets rebuilt when the user navigates to it
   @override
   bool get wantKeepAlive => false;
 
@@ -29,8 +33,11 @@ class _BookmarksPageState extends State<BookmarksPage> with AutomaticKeepAliveCl
   //   );
   // });
 
+  //get the list of bookmarks from the user settings(local storage)
   List<News> bookmarks = UserSettings.getBookmarks();
 
+  //this widget is shown when there are no bookmarks
+  //its just a text saying no bookmarks in the center of the screen
   Widget emptyData() {
     return const SliverFillRemaining(
       child: Center(
@@ -51,13 +58,16 @@ class _BookmarksPageState extends State<BookmarksPage> with AutomaticKeepAliveCl
     return CustomScrollView(
       slivers: [
         const TopBar(
-          title: Text("Bookmarks"),
+          title: Text("Bookmarks"), //the title of the page
         ),
+        //if there are no bookmarks, show the emptyData widget
+        //else show the list of bookmarks
         bookmarks.isEmpty ? emptyData() : SliverList(
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
-              return NewsFeedCard(news: bookmarks[index]);
+              return NewsFeedCard(news: bookmarks[index]); //returns a news feed card with the news data for every news
             },
+            //the number of news in the bookmarks list
             childCount: bookmarks.length
           ),
         ),
