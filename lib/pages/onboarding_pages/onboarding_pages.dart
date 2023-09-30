@@ -79,8 +79,8 @@ class DataSelectionPage extends StatefulWidget {
 }
 
 class _DataSelectionPageState extends State<DataSelectionPage> {
-  String? country;
-  List<String> selectedTopics = [];
+  String? country = UserSettings.getSelectedCountry();
+  List<String> selectedTopics = UserSettings.getUserFavourites() ?? [];
 
 
  final List<String> allTopics = [
@@ -123,7 +123,6 @@ class _DataSelectionPageState extends State<DataSelectionPage> {
                 showCountryPicker(
                   context: context,
                   onSelect: (country) {
-                    UserSettings.setSelectedCountry(country.name);
                     setState(() {
                       this.country = country.name;
                     });

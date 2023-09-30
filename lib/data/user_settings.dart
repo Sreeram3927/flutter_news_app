@@ -31,21 +31,16 @@ class UserSettings {
   static Future<void> setSelectedCountry(String value) async {
     await _prefs.setString('country', value);
   }
-  static String getSelectedCountry() {
-    return _prefs.getString('country') ?? 'India';
+  static String? getSelectedCountry() {
+    return _prefs.getString('country');
   }
 
 
   static Future<void> setUserFavourites(List<String> value) async {
     await _prefs.setStringList('userFavourites', value);
   }
-  static List<String> getUserFavourites() {
-    return _prefs.getStringList('userFavourites') ?? [
-      'Space',
-      'Technology',
-      'Science',
-      'Programming',
-    ];
+  static List<String>? getUserFavourites() {
+    return _prefs.getStringList('userFavourites');
   }
 
 

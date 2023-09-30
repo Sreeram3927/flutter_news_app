@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:news_watch/data/user_settings.dart';
+import 'package:news_watch/pages/onboarding_pages/onboarding_pages.dart';
 import 'package:news_watch/pages/settings/settings_functions.dart';
 import 'package:news_watch/widgets/top_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -25,10 +27,39 @@ class _SettingsPageState extends State<SettingsPage> {
             [
 
               ListTile(
-                title: const Text('Manage Favourites'),
+                title: const Text('Manage Preferences'),
                 leading: const Icon(Icons.favorite_rounded),
-                onTap: () {
-                  
+                onTap: () async {
+                  final data = await Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return DataSelectionPage(
+                          nextScreen: () => Navigator.pop(context, 'changed'),
+                        );
+                      },
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        const begin = Offset(0.0, 1.0);
+                        const end = Offset.zero;
+                        const curve = Curves.easeInOut;
+
+                        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                        var offsetAnimation = animation.drive(tween);
+
+                        return SlideTransition(
+                          position: offsetAnimation,
+                          child: child,
+                        );
+                      },
+                    )
+                  );
+                  if (data == 'changed') {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Preferences Updated'),
+                      ),
+                    );
+                  }
                 },
               ),
 
@@ -88,11 +119,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     builder: clearData,
                   );
                   if (data == 'clear') {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Data cleared'),
-                      ),
-                    );
+                    SystemNavigator.pop();
                   }
                 },
               ),

@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   bool isLoading = true;
   bool isError = false;
 
-  String country = UserSettings.getSelectedCountry();
+  String country = UserSettings.getSelectedCountry() ?? 'India';
   List<TrendingNewsFeed> countryNews = [];
   Future<void> getCountryNews() async {
     setState(() => isLoading = true);
@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
 
   List<Widget> favourites = [];
   void getFavourites() {
-    setState(() => favourites = UserSettings.getUserFavourites().map((fav) => FavouriteNewsCard(favourite: fav)).toList());
+    setState(() => favourites = UserSettings.getUserFavourites()!.map((fav) => FavouriteNewsCard(favourite: fav)).toList());
   }
 
   Widget onError() {
