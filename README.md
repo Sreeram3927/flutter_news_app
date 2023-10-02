@@ -74,7 +74,7 @@ This project is under the [MIT License](https://github.com/sreeram3927/flutter_n
 
 ### Bookmarks Page
 
-<img src="screenshots/bookmarks(1).png" width="200" height="410">
+<img src="screenshots/bookmarks(1).png" width="200" height="410">  <img src="screenshots/bookmarks_2.png" width="200" height="410">
 
 ### Settings Page
 
