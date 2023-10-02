@@ -47,6 +47,7 @@ class BingScraper {
               author: element.attributes['data-author'] ?? 'Error in author', //check for the author in the div
               authorLogoURL: element.querySelector('div.publogo img')?.attributes['src'], //check for the author logo(small) in the div
               authorBigLogoURL: element.querySelector('div.caption_img img')?.attributes['src'], //check for the author logo(big) in the div
+              imageURL: element.querySelector('div.image.right img')?.attributes['src'], //check for the image in the div
               webURL: element.attributes['data-url'] ?? 'Error in webURL', //check for the url of the news in the div
               timeAgo: element.querySelector('span[aria-label]')?.text ?? '', //check for the time ago in the span
             )
