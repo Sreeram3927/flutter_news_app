@@ -49,7 +49,20 @@ class UserSettings {
   }
   //this function is used to get the bookmarks of the user
   static List<News> getBookmarks() {
-    final encodedList = _prefs.getStringList('bookmarks') ?? [];
-    return encodedList.map((item) => News.fromJson(jsonDecode(item))).toList(); //convert the json to news format
+  final encodedList = _prefs.getStringList('bookmarks') ?? [];
+  final bookmarkList = <News>[];
+
+  for (final item in encodedList) {
+    try {
+      final decodedItem = jsonDecode(item);
+      final newsItem = News.fromJson(decodedItem);
+      bookmarkList.add(newsItem);
+    } catch (e) {
+      // Handle JSON decoding errors, e.g., log the error or skip the problematic item.
+      print('Error decoding JSON: $e');
+    }
   }
+
+  return bookmarkList;
+}
 }
