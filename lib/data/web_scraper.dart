@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart';
 import 'package:news_watch/data/news.dart';
@@ -70,36 +71,36 @@ class BingScraper {
         //   final timeAgo = element.querySelector('span[aria-label]')?.text;
 
 
-        //   print('Image Source: $imageSrc');
-        //   print('Title: $title');
-        //   print('Author: $author');
-        //   print('Author Logo: $authorLogo');
-        //   print('Author Big Logo: $authorBigLogo');
-        // //   print('Author Image: $authorImage');
-        // //   print('Author Icon: $authorIcon');
-        //   print('URL: $url');
-        //   print('Snippet: $content');
-        //   print('Time Ago: $timeAgo');
-        //   print('--------------------------------------');
+        //   debugPrint('Image Source: $imageSrc');
+        //   debugPrint('Title: $title');
+        //   debugPrint('Author: $author');
+        //   debugPrint('Author Logo: $authorLogo');
+        //   debugPrint('Author Big Logo: $authorBigLogo');
+        // //   debugPrint('Author Image: $authorImage');
+        // //   debugPrint('Author Icon: $authorIcon');
+        //   debugPrint('URL: $url');
+        //   debugPrint('Snippet: $content');
+        //   debugPrint('Time Ago: $timeAgo');
+        //   debugPrint('--------------------------------------');
         // }
         // for (var news in data) {
-        //   print(news.title);
-        //   print(news.content);
-        //   print(news.imageURL);
-        //   print(news.author);
-        //   print(news.authorLogoURL);
-        //   print(news.authorBigLogoURL);
-        //   print(news.webURL);
-        //   print(news.timeAgo);
-        //   print('--------------------------------------');
+        //   debugPrint(news.title);
+        //   debugPrint(news.content);
+        //   debugPrint(news.imageURL);
+        //   debugPrint(news.author);
+        //   debugPrint(news.authorLogoURL);
+        //   debugPrint(news.authorBigLogoURL);
+        //   debugPrint(news.webURL);
+        //   debugPrint(news.timeAgo);
+        //   debugPrint('--------------------------------------');
         // }
         return data; //return the data list
       } else {
-        // print('Failed to load the website: ${response.statusCode}');
+        // debugPrint('Failed to load the website: ${response.statusCode}');
         return []; //return an empty list if the response is not successful
       }
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       rethrow; //rethrow the exception, if caught any
     }
     

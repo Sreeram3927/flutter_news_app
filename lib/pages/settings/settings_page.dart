@@ -62,6 +62,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   if (data == 'changed') {
                     //if yes show a snackbar notifying the user 
                     //that the preferences have been updated
+                    if (!context.mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text('Preferences Updated'),
@@ -151,6 +152,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   //check if the user has confirmed the action
                   if (data == 'clear') {
                     //if yes tell them the bookmarks have been cleared
+                    if (!context.mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text('Bookmarks cleared'),

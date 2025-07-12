@@ -105,7 +105,7 @@ class _NewsCardState extends State<NewsCard> {
             //call the visitWebsite function in the news class when the button is pressed
             onPressed: widget.news.visitWebsite,
             style: ButtonStyle(
-              fixedSize: MaterialStateProperty.all(const Size(double.maxFinite, 50))
+              fixedSize: WidgetStateProperty.all(const Size(double.maxFinite, 50))
             ),
             icon: const Icon(Icons.launch_rounded),
             label: const Text(

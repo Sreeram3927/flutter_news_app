@@ -142,7 +142,8 @@ class News {
 
   //this function shares the news with other social media apps
   Future<void> shareNews() async {
-    await Share.share('$title\n\n$webURL'); //shares the title and webURL of the news as text format
+    final SharePlus shareService = SharePlus.instance;
+    await shareService.share(ShareParams(title: title, text: webURL)); //shares the title and webURL of the news as text format
   }
 
   //this function opens the news(webURL) in the inAppWebView

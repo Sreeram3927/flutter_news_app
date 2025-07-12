@@ -58,7 +58,7 @@ class WelcomePage extends StatelessWidget {
           //button to navigate to the next screen
           ElevatedButton(
             style: ButtonStyle(
-              fixedSize: MaterialStateProperty.all<Size>(const Size(200, 50)),
+              fixedSize: WidgetStateProperty.all<Size>(const Size(200, 50)),
             ),
             onPressed: nextScreen,
             child: const Text('Continue'),
@@ -194,7 +194,7 @@ class _DataSelectionPageState extends State<DataSelectionPage> {
                   }
                 },
                 style: ButtonStyle(
-                  fixedSize: MaterialStateProperty.all<Size>(const Size(200, 50)),
+                  fixedSize: WidgetStateProperty.all<Size>(const Size(200, 50)),
                 ),
                 child: const Text('Continue'),
               ),

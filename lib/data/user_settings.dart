@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:news_watch/data/news.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,7 +21,7 @@ class UserSettings {
     await _prefs.setBool('showHome', value);
   }
   //this function is used to check if the user has launched the app already or not
-  static getShowHome() {
+  static bool? getShowHome() {
     return _prefs.getBool('showHome');
   }
 
@@ -59,7 +60,7 @@ class UserSettings {
         bookmarkList.add(newsItem);
       } catch (e) {
         // Handle JSON decoding errors, e.g., log the error or skip the problematic item.
-        print('Error decoding JSON: $e');
+        debugPrint('Error decoding JSON: $e');
       }
     }
 

@@ -38,7 +38,7 @@ class _BottomBarState extends State<BottomBar> {
           //this bottom border is added to prevent the following error
           //The following assertion was thrown during paint():
           //A borderRadius can only be given on borders with uniform colors and styles.
-          bottom: BorderSide(color: Colors.blueAccent[100]!.withOpacity(1), width: 1),
+          bottom: BorderSide(color: Colors.blueAccent[100]!.withValues(alpha: 1.0), width: 1),
         ),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(10),

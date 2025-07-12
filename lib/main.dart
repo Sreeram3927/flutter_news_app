@@ -36,7 +36,7 @@ class MainApp extends StatelessWidget {
           ), 
         ),
         //define the card theme
-        cardTheme: const CardTheme(
+        cardTheme: const CardThemeData(
           color: Colors.white,
           elevation: 3,
         ),
